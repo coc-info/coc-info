@@ -1,0 +1,5 @@
+@use './colors';
+
+$primary: colors.$black;
+$primary-emphasized: colors.$white;
+$primary-deemphasized: colors.$dark-gray;

@@ -1,3 +1,6 @@
+@use '../styles/colors/colors';
+@use '../styles/colors/font-colors';
+
 .main {
   width: 100vw;
   height: 100vh;
@@ -5,9 +8,9 @@
   justify-content: center;
   align-items: center;
 
-  background-color: #454ec9;
+  background-color: colors.$sub-black-1;
 
-  color: #fff;
+  color: font-colors.$primary-emphasized;
   font-size: 3em;
   font-weight: bold;
 }
