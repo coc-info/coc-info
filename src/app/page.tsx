@@ -1,9 +1,9 @@
-import styles from './page.module.css';
+import styles from './page.module.scss';
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <h1>hello next</h1>
+      <h1>Hello COC Info. This is initial view</h1>
     </main>
   );
 }
