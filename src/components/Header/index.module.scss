@@ -1,0 +1,33 @@
+@use '../../styles/colors';
+
+.headerArea {
+  background-color: colors.$black;
+  display: flex;
+  justify-content: center;
+  padding: 10px 20px;
+}
+
+.header {
+  width: 100%;
+  max-width: 768px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tempLogo {
+  color: colors.$white;
+  font-size: 20px;
+  font-weight: 700;
+
+  &--hidden {
+    visibility: hidden;
+  }
+}
+
+.menuButton {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}

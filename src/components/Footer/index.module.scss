@@ -1,0 +1,21 @@
+@use '../../styles/colors';
+@use '@/styles/fonts/primaryFont';
+
+.footerArea {
+  background-color: colors.$black;
+  display: flex;
+  justify-content: center;
+  padding: 30px 20px;
+}
+
+.footer {
+  width: 100%;
+  max-width: 768px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  > p {
+    @include primaryFont.primary-12px;
+  }
+}

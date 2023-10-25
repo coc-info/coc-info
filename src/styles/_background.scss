@@ -1,0 +1,6 @@
+@use './colors';
+
+@mixin content {
+  border-radius: 5px;
+  background-color: colors.$light-black;
+}
