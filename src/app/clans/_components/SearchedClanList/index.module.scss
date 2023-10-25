@@ -1,0 +1,8 @@
+@use '../../../../styles/background';
+@use '../../../../styles/screen';
+
+.searchedClanList {
+  @include background.content;
+  width: 100%;
+  max-width: screen.$mobile-max-size;
+}

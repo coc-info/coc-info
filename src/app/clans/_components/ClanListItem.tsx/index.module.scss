@@ -1,0 +1,73 @@
+@use '../../../../styles/colors';
+@use '../../../../styles/fonts/primaryFont';
+
+.clanListItem {
+  padding: 10px;
+
+  display: flex;
+  justify-content: space-between;
+
+  border-bottom: 1px solid colors.$pale-black;
+
+  > .clanInfo {
+    display: flex;
+    align-items: center;
+
+    > .level {
+      @include primaryFont.primary-14px;
+      color: colors.$white;
+      width: 40px;
+    }
+
+    > .rightInfo {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      > div {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        > .clanIdentity {
+          display: flex;
+          align-items: flex-end;
+          gap: 4px;
+
+          > .clanName {
+            @include primaryFont.primary-14px;
+            color: colors.$white;
+          }
+
+          > .clanTag {
+            @include primaryFont.primary-10px;
+            color: colors.$dark-gray;
+          }
+        }
+
+        > .restInfo {
+          display: flex;
+          gap: 10px;
+          > .members {
+            @include primaryFont.primary-12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+          }
+
+          > .location {
+            @include primaryFont.primary-12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+          }
+        }
+      }
+    }
+  }
+
+  > .labelContainer {
+    display: flex;
+    gap: 5px;
+  }
+}

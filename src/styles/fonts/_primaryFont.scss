@@ -4,6 +4,11 @@ $primary-color: colors.$gray;
 $primary-emphasized-color: colors.$white;
 $primary-deemphasized-color: colors.$dark-gray;
 
+@mixin primary-10px {
+  font-size: 0.625rem;
+  color: $primary-color;
+}
+
 @mixin primary-12px {
   font-size: 0.75rem;
   color: $primary-color;
