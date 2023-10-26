@@ -1,5 +1,7 @@
 @use './colors';
 
+$baseBackgroundColor: colors.$pale-black;
+
 @mixin content {
   border-radius: 5px;
   background-color: colors.$light-black;

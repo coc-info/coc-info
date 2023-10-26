@@ -1,0 +1,6 @@
+@use '@/styles/background';
+
+@mixin contentBox {
+  @include background.content;
+  padding: 10px 20px;
+}

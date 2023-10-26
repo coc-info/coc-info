@@ -2,8 +2,8 @@ import styles from './index.module.scss';
 
 import Image from 'next/image';
 
-import Label from '@/components/Label';
-import Badge from '@/components/Badge';
+import Label from '@/components/images/Label';
+import ClanBadge from '@/components/images/badges/ClanBadge';
 
 import peopleIcon from '@/images/icons/people-icon.svg';
 import earthIcon from '@/images/icons/earth.svg';
@@ -31,7 +31,7 @@ export default function ClanListItem({ level, badgeUrl, name, tag, members, loca
         <div className={styles.clanInfo}>
           <div className={styles.level}>Lv.{level}</div>
           <div className={styles.rightInfo}>
-            <Badge name="" url={badgeUrl} />
+            <ClanBadge name="" url={badgeUrl} />
             <div>
               <div className={styles.clanIdentity}>
                 <div className={styles.clanName}>{name}</div>

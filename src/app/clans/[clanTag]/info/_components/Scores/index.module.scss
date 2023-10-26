@@ -1,0 +1,29 @@
+@use '../../_styles/contentBox';
+@use '@/styles/fonts/primaryFont';
+
+.scores {
+  @include contentBox.contentBox;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.leagueTrophy {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  > .leagueName {
+    @include primaryFont.primary-16px;
+  }
+}
+
+.trophies {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  > .score {
+    @include primaryFont.primary-14px;
+  }
+}
