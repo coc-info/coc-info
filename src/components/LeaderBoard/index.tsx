@@ -1,21 +1,9 @@
+import { fetchLeaderboardOfClans } from '@/utils/coc-api/leaderboard';
 import Item from './Item';
 import styles from './index.module.scss';
 
 export default async function LeaderBoard() {
-  const data = (await fetch('https://api.clashofclans.com/v1/locations/32000216/rankings/clans?limit=10', {
-    headers: {
-      Authorization: `Bearer ${process.env.COC_API_KEY}`,
-    },
-  }).then((res) => res.json())) as {
-    items: {
-      rank: number;
-      clanLevel: number;
-      badgeUrls: { small: string };
-      name: string;
-      members: number;
-      clanPoints: number;
-    }[];
-  };
+  const [res, data] = await fetchLeaderboardOfClans({ limit: 20 });
 
   return (
     <table className={styles.leaderBoard}>
