@@ -2,72 +2,74 @@
 @use '@/styles/fonts/primaryFont';
 
 .clanListItem {
-  padding: 10px;
-
-  display: flex;
-  justify-content: space-between;
-
   border-bottom: 1px solid colors.$pale-black;
-
-  > .clanInfo {
+  > .link {
+    padding: 10px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
 
-    > .level {
-      @include primaryFont.primary-14px;
-      color: colors.$white;
-      width: 40px;
-    }
-
-    > .rightInfo {
+    text-decoration: none;
+    > .clanInfo {
       display: flex;
       align-items: center;
-      gap: 5px;
 
-      > div {
+      > .level {
+        @include primaryFont.primary-14px;
+        color: colors.$white;
+        width: 40px;
+      }
+
+      > .rightInfo {
         display: flex;
-        flex-direction: column;
+        align-items: center;
         gap: 5px;
 
-        > .clanIdentity {
+        > div {
           display: flex;
-          align-items: flex-end;
-          gap: 4px;
+          flex-direction: column;
+          gap: 5px;
 
-          > .clanName {
-            @include primaryFont.primary-14px;
-            color: colors.$white;
-          }
-
-          > .clanTag {
-            @include primaryFont.primary-10px;
-            color: colors.$dark-gray;
-          }
-        }
-
-        > .restInfo {
-          display: flex;
-          gap: 10px;
-          > .members {
-            @include primaryFont.primary-12px;
+          > .clanIdentity {
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             gap: 4px;
+
+            > .clanName {
+              @include primaryFont.primary-14px;
+              color: colors.$white;
+            }
+
+            > .clanTag {
+              @include primaryFont.primary-10px;
+              color: colors.$dark-gray;
+            }
           }
 
-          > .location {
-            @include primaryFont.primary-12px;
+          > .restInfo {
             display: flex;
-            align-items: center;
-            gap: 4px;
+            gap: 10px;
+            > .members {
+              @include primaryFont.primary-12px;
+              display: flex;
+              align-items: center;
+              gap: 4px;
+            }
+
+            > .location {
+              @include primaryFont.primary-12px;
+              display: flex;
+              align-items: center;
+              gap: 4px;
+            }
           }
         }
       }
     }
-  }
 
-  > .labelContainer {
-    display: flex;
-    gap: 5px;
+    > .labelContainer {
+      display: flex;
+      gap: 5px;
+    }
   }
 }

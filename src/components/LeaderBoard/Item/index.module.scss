@@ -3,7 +3,6 @@
 
 .item {
   border-bottom: 1px solid colors.$pale-black;
-
   > td {
     @include primaryFont.primary-14px;
     padding: 10px 0;
@@ -14,7 +13,14 @@
       padding-left: 10px;
     }
 
-    &.clan {
+    &:last-child {
+      padding-right: 10px;
+    }
+
+    > .clan {
+      @include primaryFont.primary-14px;
+      text-decoration: none;
+
       display: flex;
       align-items: center;
       gap: 10px;
@@ -28,10 +34,6 @@
           height: 24px;
         }
       }
-    }
-
-    &:last-child {
-      padding-right: 10px;
     }
   }
 }

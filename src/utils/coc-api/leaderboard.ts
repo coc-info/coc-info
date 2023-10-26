@@ -5,6 +5,7 @@ const LOCATION_ID_OF_KR = '32000216';
 
 interface Data {
   items: {
+    tag: string;
     rank: number;
     clanLevel: number;
     badgeUrls: { small: string };

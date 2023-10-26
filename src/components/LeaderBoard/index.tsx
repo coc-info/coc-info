@@ -20,6 +20,8 @@ export default async function LeaderBoard() {
         {data.items.map((item) => {
           return (
             <Item
+              key={item.tag}
+              tag={item.tag}
               rank={item.rank}
               level={item.clanLevel}
               badgeUrl={item.badgeUrls.small}
