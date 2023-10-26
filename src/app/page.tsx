@@ -1,7 +1,7 @@
 import styles from './page.module.scss';
 
-import LeaderBoard from './_components/LeaderBoard';
-import SearchBar from './_components/SearchBar';
+import LeaderBoard from '../components/LeaderBoard';
+import SearchBar from '../components/SearchBar';
 
 export default function Home() {
   return (

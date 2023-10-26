@@ -2,8 +2,8 @@ import styles from './index.module.scss';
 
 import Image from 'next/image';
 
-import Label from './Label';
-import Badge from './Badge';
+import Label from '@/components/Label';
+import Badge from '@/components/Badge';
 
 import peopleIcon from '@/images/icons/people-icon.svg';
 import earthIcon from '@/images/icons/earth.svg';

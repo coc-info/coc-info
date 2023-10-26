@@ -30,7 +30,6 @@ export default async function LeaderBoard() {
       </thead>
       <tbody>
         {data.items.map((item) => {
-          console.log(item);
           return (
             <Item
               rank={item.rank}

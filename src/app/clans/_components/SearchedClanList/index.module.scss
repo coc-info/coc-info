@@ -1,5 +1,5 @@
-@use '../../../../styles/background';
-@use '../../../../styles/screen';
+@use '@/styles/background';
+@use '@/styles/screen';
 
 .searchedClanList {
   @include background.content;

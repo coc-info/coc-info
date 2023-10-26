@@ -1,39 +1,36 @@
 import styles from './index.module.scss';
 
-import ClanListItem from '../ClanListItem.tsx';
+import ClanListItem from './ClanListItem.tsx';
+import { searchClans } from '@/utils/coc-api/searchClans';
+// import Link from 'next/link';
 
-interface ItemTempInterface {
-  clanLevel: number;
-  badgeUrls: { medium: string };
-  name: string;
-  tag: string;
-  members: number;
-  location?: { name: string };
-  labels: [];
-}
+export default async function SeachedClanList({ name, after }: { name: string; after?: string }) {
+  const searchOptions = {
+    name,
+    after,
+    limit: 10,
+  };
 
-export default async function SeachedClanList({ name }: { name: string }) {
-  const data = await fetch(`https://api.clashofclans.com/v1/clans?name=${name}&limit=10`, {
-    headers: {
-      Authorization: `Bearer ${process.env.COC_API_KEY}`,
-    },
-  }).then((res) => res.json());
+  const [res, data] = await searchClans(searchOptions);
 
   return (
-    <ul className={styles.searchedClanList}>
-      {data.items.map((item: ItemTempInterface) => {
-        return (
-          <ClanListItem
-            level={item.clanLevel}
-            badgeUrl={item.badgeUrls.medium}
-            name={item.name}
-            tag={item.tag}
-            members={item.members}
-            location={item.location?.name ?? ''}
-            labels={item.labels}
-          />
-        );
-      })}
-    </ul>
+    <>
+      {/* <Link href="/clans?name=혁명군&after=eyJwb3MiOjEwfQ">다음</Link> */}
+      <ul className={styles.searchedClanList}>
+        {data.items.map((item) => {
+          return (
+            <ClanListItem
+              level={item.clanLevel}
+              badgeUrl={item.badgeUrls.medium}
+              name={item.name}
+              tag={item.tag}
+              members={item.members}
+              location={item.location?.name ?? ''}
+              labels={item.labels}
+            />
+          );
+        })}
+      </ul>
+    </>
   );
 }
