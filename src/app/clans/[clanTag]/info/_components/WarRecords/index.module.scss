@@ -1,0 +1,66 @@
+@use '../../_styles/contentBox';
+@use '@/styles/fonts/primaryFont';
+@use '@/styles/colors';
+
+.warRecords {
+  @include contentBox.contentBox;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+
+    .left {
+      display: flex;
+      gap: 18px;
+    }
+  }
+
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .left {
+      display: flex;
+      gap: 18px;
+    }
+  }
+}
+
+.warRecord {
+  @include primaryFont.primary-14px;
+}
+
+.recordsBoard {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+
+  > .record {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+
+    background-color: colors.$neutral-color;
+
+    &.win {
+      background-color: colors.$positive-color;
+    }
+
+    &.lose {
+      background-color: colors.$negative-color;
+    }
+  }
+}
+
+.moreDetails {
+  @include primaryFont.primary-14px;
+  padding: 5px;
+  background-color: colors.$main-color;
+  border: none;
+  border-radius: 5px;
+  color: colors.$white;
+}

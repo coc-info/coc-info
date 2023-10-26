@@ -20,6 +20,7 @@ export default async function SeachedClanList({ name, after }: { name: string; a
         {data.items.map((item) => {
           return (
             <ClanListItem
+              key={item.tag}
               level={item.clanLevel}
               badgeUrl={item.badgeUrls.medium}
               name={item.name}

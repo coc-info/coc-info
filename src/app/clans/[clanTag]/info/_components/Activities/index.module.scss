@@ -1,0 +1,22 @@
+@use '../../_styles/contentBox';
+@use '@/styles/fonts/primaryFont';
+
+.activities {
+  @include contentBox.contentBox;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.labels {
+  display: flex;
+  gap: 14px;
+}
+
+.sendedReinforcements {
+  @include primaryFont.primary-14px;
+}
+
+.receivedReinforcements {
+  @include primaryFont.primary-14px;
+}

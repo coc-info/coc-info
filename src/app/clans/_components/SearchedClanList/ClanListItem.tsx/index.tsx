@@ -54,7 +54,7 @@ export default function ClanListItem({ level, badgeUrl, name, tag, members, loca
         </div>
         <div className={styles.labelContainer}>
           {labels.map((label) => {
-            return <Label name={label.name} url={label.iconUrls.small} />;
+            return <Label key={label.name} name={label.name} url={label.iconUrls.small} />;
           })}
         </div>
       </Link>

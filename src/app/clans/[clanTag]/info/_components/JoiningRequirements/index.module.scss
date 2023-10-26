@@ -1,0 +1,34 @@
+@use '../../_styles/contentBox';
+@use '@/styles/fonts/primaryFont';
+@use '@/styles/colors';
+
+.joiningRequirements {
+  @include contentBox.contentBox;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title {
+  @include primaryFont.primary-12px;
+  color: colors.$dark-gray;
+}
+
+.requirements {
+  display: flex;
+  justify-content: space-between;
+}
+
+.requirement {
+  @include primaryFont.primary-14px;
+}
+
+.trophies {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  > .score {
+    @include primaryFont.primary-14px;
+  }
+}
