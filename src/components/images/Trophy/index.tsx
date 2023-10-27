@@ -18,7 +18,7 @@ export default function Trophy({ trophyType }: TrophyProps) {
 
   return (
     <div className={styles.badgeWrapper}>
-      <Image alt="클랜전 리그 뱃지" src={TROPHY_TABLE[trophyType]} />
+      <Image alt="클랜전 리그 뱃지" src={TROPHY_TABLE[trophyType]} height={20} />
     </div>
   );
 }

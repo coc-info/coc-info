@@ -14,8 +14,18 @@ $primary-deemphasized-color: colors.$dark-gray;
   color: $primary-color;
 }
 
+@mixin primary-13px {
+  font-size: 0.8125rem;
+  color: $primary-color;
+}
+
 @mixin primary-14px {
   font-size: 0.875rem;
+  color: $primary-color;
+}
+
+@mixin primary-15px {
+  font-size: 0.9375rem;
   color: $primary-color;
 }
 
@@ -31,5 +41,10 @@ $primary-deemphasized-color: colors.$dark-gray;
 
 @mixin primary-20px {
   font-size: 1.25rem;
+  color: $primary-color;
+}
+
+@mixin primary-24px {
+  font-size: 1.5rem;
   color: $primary-color;
 }

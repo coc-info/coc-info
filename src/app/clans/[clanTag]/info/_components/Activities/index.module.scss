@@ -13,10 +13,9 @@
   gap: 14px;
 }
 
-.sendedReinforcements {
-  @include primaryFont.primary-14px;
-}
-
-.receivedReinforcements {
-  @include primaryFont.primary-14px;
+.reinforcements {
+  @include primaryFont.primary-15px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }

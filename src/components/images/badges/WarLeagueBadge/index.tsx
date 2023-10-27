@@ -1,4 +1,3 @@
-import styles from './index.module.scss';
 import Image from 'next/image';
 
 import warBronze1Badge from '@/images/game-images/icons/war-league-badges/war-bronze-1.webp';
@@ -29,9 +28,11 @@ import type { WarLeague } from '@/types/warLeague';
 
 interface WarLeagueBadgeProps {
   league: WarLeague;
+  width?: number;
+  height?: number;
 }
 
-export default function WarLeagueBadge({ league }: WarLeagueBadgeProps) {
+export default function WarLeagueBadge({ league, width, height }: WarLeagueBadgeProps) {
   const BADGE_TABLE = {
     bronze1: warBronze1Badge,
     bronze2: warBronze2Badge,
@@ -53,9 +54,5 @@ export default function WarLeagueBadge({ league }: WarLeagueBadgeProps) {
     champion3: warChampion3Badge,
   } as const;
 
-  return (
-    <div className={styles.badgeWrapper}>
-      <Image alt="클랜전 리그 뱃지" src={BADGE_TABLE[league]} width={30} height={30} />
-    </div>
-  );
+  return <Image alt="클랜전 리그 뱃지" src={BADGE_TABLE[league]} width={width} height={height} />;
 }

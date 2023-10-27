@@ -10,17 +10,33 @@
 }
 
 .title {
-  @include primaryFont.primary-12px;
+  @include primaryFont.primary-13px;
   color: colors.$dark-gray;
 }
 
 .requirements {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.requirement {
-  @include primaryFont.primary-14px;
+.partition {
+  display: flex;
+  gap: 20px;
+  // justify-content: space-between;
+}
+
+.clanType {
+  @include primaryFont.primary-15px;
+  display: flex;
+  align-items: center;
+}
+
+.townhall {
+  @include primaryFont.primary-15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .trophies {
@@ -29,6 +45,6 @@
   gap: 4px;
 
   > .score {
-    @include primaryFont.primary-14px;
+    @include primaryFont.primary-15px;
   }
 }

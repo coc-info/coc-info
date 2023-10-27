@@ -17,8 +17,8 @@ export default function WarRecords({ wins, losses, ties, winStreak, recentRecord
           <div className={styles.warRecord}>{wins}승</div>
           <div className={styles.warRecord}>{losses}패</div>
           <div className={styles.warRecord}>{ties}무</div>
+          <div className={styles.warRecord}>승률 58.62%</div>
         </div>
-        <div className={styles.warRecord}>승률 58.62%</div>
       </div>
       {/*bottom*/}
       <div className={styles.bottom}>

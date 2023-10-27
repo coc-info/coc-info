@@ -20,26 +20,25 @@
 }
 
 .clanName {
-  @include primaryFont.primary-20px;
+  @include primaryFont.primary-24px;
   color: colors.$white;
   font-weight: 700;
 }
 
 .clanTag {
-  @include primaryFont.primary-12px;
+  @include primaryFont.primary-13px;
 }
 
-.restInfo {
+.restInfos {
   display: flex;
   gap: 10px;
 }
 
-.members {
-  @include primaryFont.primary-14px;
-}
-
-.location {
-  @include primaryFont.primary-14px;
+.restInfo {
+  @include primaryFont.primary-15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 @mixin contentBox {

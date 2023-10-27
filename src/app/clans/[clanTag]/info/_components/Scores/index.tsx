@@ -36,21 +36,24 @@ export default function Scores({ league, tropies, builderTropies, capitalTropies
   return (
     <div className={styles.scores}>
       <div className={styles.leagueTrophy}>
-        <WarLeagueBadge league={league} />
+        <WarLeagueBadge league={league} height={24} />
         <span className={styles.leagueName}>{LEAGUE_KR_TABLE[league]}</span>
       </div>
-      <div className={styles.trophies}>
-        <Trophy trophyType="home" />
-        <span className={styles.score}>{tropies}</span>
-      </div>
-      <div className={styles.trophies}>
-        <Trophy trophyType="builder" />
-        <span className={styles.score}>{builderTropies}</span>
-      </div>
 
-      <div className={styles.trophies}>
-        <Trophy trophyType="capital" />
-        <span className={styles.score}>{capitalTropies}</span>
+      <div className={styles.trophiesContainer}>
+        <div className={styles.trophies}>
+          <Trophy trophyType="home" />
+          <span className={styles.score}>{tropies}</span>
+        </div>
+        <div className={styles.trophies}>
+          <Trophy trophyType="builder" />
+          <span className={styles.score}>{builderTropies}</span>
+        </div>
+
+        <div className={styles.trophies}>
+          <Trophy trophyType="capital" />
+          <span className={styles.score}>{capitalTropies}</span>
+        </div>
       </div>
     </div>
   );

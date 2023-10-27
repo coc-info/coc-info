@@ -4,8 +4,8 @@
 .scores {
   @include contentBox.contentBox;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .leagueTrophy {
@@ -14,8 +14,14 @@
   gap: 10px;
 
   > .leagueName {
-    @include primaryFont.primary-16px;
+    @include primaryFont.primary-15px;
   }
+}
+
+.trophiesContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .trophies {
@@ -24,6 +30,6 @@
   gap: 4px;
 
   > .score {
-    @include primaryFont.primary-14px;
+    @include primaryFont.primary-15px;
   }
 }
