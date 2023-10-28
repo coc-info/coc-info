@@ -1,5 +1,5 @@
 import { fetchToCocApi } from '.';
-import { createQueryString } from './utils';
+import { createQueryString } from './utils/createQueryString';
 
 const LOCATION_ID_OF_KR = '32000216';
 

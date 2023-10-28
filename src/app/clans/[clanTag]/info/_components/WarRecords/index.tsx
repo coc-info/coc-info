@@ -9,6 +9,9 @@ interface WarRecordsProps {
 }
 
 export default function WarRecords({ wins, losses, ties, winStreak, recentRecords }: WarRecordsProps) {
+  const winRate = wins !== 0 ? (wins / (wins + losses + ties)) * 100 : 0;
+  const RoundedWinRate = Math.round(winRate * 100) / 100;
+
   return (
     <div className={styles.warRecords}>
       {/*top*/}
@@ -17,7 +20,7 @@ export default function WarRecords({ wins, losses, ties, winStreak, recentRecord
           <div className={styles.warRecord}>{wins}승</div>
           <div className={styles.warRecord}>{losses}패</div>
           <div className={styles.warRecord}>{ties}무</div>
-          <div className={styles.warRecord}>승률 58.62%</div>
+          <div className={styles.warRecord}>승률 {RoundedWinRate}%</div>
         </div>
       </div>
       {/*bottom*/}

@@ -1,4 +1,5 @@
 export type WarLeague =
+  | 'unranked'
   | 'bronze1'
   | 'bronze2'
   | 'bronze3'

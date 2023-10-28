@@ -1,7 +1,6 @@
 import styles from './index.module.scss';
-import Image from 'next/image';
 
-import Trophy from '@/components/images/Trophy';
+import Image from 'next/image';
 
 import th15Image from '@/images/game-images/structure/town-hall/town-hall-15.webp';
 import th14Image from '@/images/game-images/structure/town-hall/town-hall-14.webp';
@@ -18,6 +17,12 @@ import th4Image from '@/images/game-images/structure/town-hall/town-hall-4.webp'
 import th3Image from '@/images/game-images/structure/town-hall/town-hall-3.webp';
 import th2Image from '@/images/game-images/structure/town-hall/town-hall-2.webp';
 import th1Image from '@/images/game-images/structure/town-hall/town-hall-1.webp';
+
+import { ClanMember } from '@/utils/coc-api/fetchClanInfo';
+
+interface MemberProps {
+  member: ClanMember;
+}
 
 // 임시. 나중에 리펙토링 예정
 const TH_TIMAGE_TABLE = [
@@ -38,47 +43,35 @@ const TH_TIMAGE_TABLE = [
   th15Image,
 ];
 
-interface JoiningRequirementsProps {
-  type: 'open' | 'inviteOnly' | 'closed';
-  requiredTownhallLevel: number;
-  trophies: number;
-  builderBaseTrophies: number;
-}
+export default function Member({ member }: MemberProps) {
+  const { tag, clanRank, name, role, trophies, league } = member;
 
-export default function JoiningRequirements({
-  type,
-  requiredTownhallLevel,
-  trophies,
-  builderBaseTrophies,
-}: JoiningRequirementsProps) {
-  const TYPE_TABLE = {
-    open: '공개',
-    inviteOnly: '초대 한정',
-    closed: '비공개',
-  };
+  const ROLE_TABLE: { [key: string]: string } = {
+    leader: '대표',
+    coLeader: '공동 대표',
+    admin: '장로',
+    member: '클랜원',
+  } as const;
 
   return (
-    <div className={styles.joiningRequirements}>
-      <div className={styles.title}>가입 조건</div>
-      <div className={styles.requirements}>
-        <div className={styles.partition}>
-          <div className={styles.clanType}>{TYPE_TABLE[type]}</div>
-          <div className={styles.townhall}>
-            <Image alt="" src={TH_TIMAGE_TABLE[requiredTownhallLevel - 1]} height={20} />
-            <span>{requiredTownhallLevel}홀 이상</span>
-          </div>
+    <tr className={styles.member}>
+      <td>{clanRank}</td>
+      <td className={styles.townhall}>
+        <div className={styles.townhallImageWrapper}>
+          <Image alt={`${name}의 마을회관`} src={TH_TIMAGE_TABLE[member.townHallLevel - 1]} height={32} />
         </div>
-        <div className={styles.partition}>
-          <div className={styles.trophies}>
-            <Trophy trophyType="home" />
-            <span className={styles.score}>{trophies.toLocaleString()}</span>
-          </div>
-          <div className={styles.trophies}>
-            <Trophy trophyType="builder" />
-            <span className={styles.score}>{builderBaseTrophies.toLocaleString()}</span>
-          </div>
+      </td>
+      <td className={styles.member}>
+        <div>{name}</div>
+        <div className={styles.role}>{ROLE_TABLE[role]}</div>
+      </td>
+
+      <td className={styles.trophies}>
+        <div className={styles.trophiesWrapper}>
+          <Image alt="리그 뱃지" src={league.iconUrls.small} width={25} height={25} />
+          <span>{trophies.toLocaleString()}</span>
         </div>
-      </div>
-    </div>
+      </td>
+    </tr>
   );
 }

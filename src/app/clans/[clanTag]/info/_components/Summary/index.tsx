@@ -11,7 +11,7 @@ interface SummaryProps {
   name: string;
   tag: string;
   members: number;
-  location: string;
+  location?: string;
 }
 
 export default function Summary({ badgeUrl, name, tag, members, location }: SummaryProps) {
@@ -28,10 +28,12 @@ export default function Summary({ badgeUrl, name, tag, members, location }: Summ
             <Image alt="people-icon" src={peopleIcon} height={15} />
             <span>{members}</span>
           </div>
-          <div className={styles.restInfo}>
-            <Image alt="earth-icon" src={earthIcon} height={15} />
-            <span>{location}</span>
-          </div>
+          {location !== undefined && (
+            <div className={styles.restInfo}>
+              <Image alt="earth-icon" src={earthIcon} height={15} />
+              <span>{location}</span>
+            </div>
+          )}
         </div>
       </div>
     </div>

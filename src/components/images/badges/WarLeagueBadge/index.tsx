@@ -34,6 +34,7 @@ interface WarLeagueBadgeProps {
 
 export default function WarLeagueBadge({ league, width, height }: WarLeagueBadgeProps) {
   const BADGE_TABLE = {
+    unranked: '',
     bronze1: warBronze1Badge,
     bronze2: warBronze2Badge,
     bronze3: warBronze3Badge,

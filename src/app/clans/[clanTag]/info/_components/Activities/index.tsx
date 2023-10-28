@@ -1,39 +1,37 @@
 import Image from 'next/image';
 import styles from './index.module.scss';
 
-import arrowPositive from '@/images/icons/arrow-positive.svg';
-import arrowNegative from '@/images/icons/arrow-negative.svg';
+import warriorPositive from '@/images/icons/warrior-positive.svg';
+import warriorNegative from '@/images/icons/warrior-negative.svg';
 
-export default function Activities() {
+interface ActivitiesProps {
+  donations: number;
+  donationsReceived: number;
+  labels: {
+    id: number;
+    name: string;
+    iconUrls: {
+      small: string;
+      medium: string;
+    };
+  }[];
+}
+
+export default function Activities({ donations, donationsReceived, labels }: ActivitiesProps) {
   return (
     <div className={styles.activities}>
       <div className={styles.labels}>
-        <Image
-          alt="Clan Wars"
-          src="https://api-assets.clashofclans.com/labels/128/lXaIuoTlfoNOY5fKcQGeT57apz1KFWkN9-raxqIlMbE.png"
-          width={30}
-          height={30}
-        />
-        <Image
-          alt="Clan War League"
-          src="https://api-assets.clashofclans.com/labels/128/5w60_3bdtYUe9SM6rkxBRyV_8VvWw_jTlDS5ieU3IsI.png"
-          width={30}
-          height={30}
-        />
-        <Image
-          alt="Clan Capital"
-          src="https://api-assets.clashofclans.com/labels/128/Odg2DaLfhMgQOci4QvHovdoYq4SDiBrocWS2Bjm8Ah8.png"
-          width={30}
-          height={30}
-        />
+        {labels.map((label) => {
+          return <Image alt={label.name} src={label.iconUrls.small} width={30} height={30} />;
+        })}
       </div>
       <div className={styles.reinforcements}>
-        <Image alt="arrow-positive" src={arrowPositive} width={15} height={10} />
-        <span>30,300</span>
+        <Image alt="arrow-positive" src={warriorPositive} width={20} height={20} />
+        <span>{donations.toLocaleString()}</span>
       </div>
       <div className={styles.reinforcements}>
-        <Image alt="arrow-negative" src={arrowNegative} width={15} height={10} />
-        <span></span>20,300
+        <Image alt="arrow-negative" src={warriorNegative} width={20} height={20} />
+        <span>{donationsReceived.toLocaleString()}</span>
       </div>
     </div>
   );

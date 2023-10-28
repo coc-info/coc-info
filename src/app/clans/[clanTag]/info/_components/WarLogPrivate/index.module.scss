@@ -1,0 +1,22 @@
+@use '../../_styles/contentBox';
+@use '@/styles/fonts/primaryFont';
+@use '@/styles/colors';
+
+.warRecords {
+  @include contentBox.contentBox;
+  @include primaryFont.primary-15px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  .top {
+    display: flex;
+    gap: 18px;
+  }
+
+  .bottom {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+}
