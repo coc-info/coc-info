@@ -39,12 +39,12 @@ export default function ClanListItem({ level, badgeUrl, name, tag, members, loca
               </div>
               <div className={styles.restInfo}>
                 <div className={styles.members}>
-                  <Image alt="people-icon" src={peopleIcon} width={12} height={12} />
+                  <Image alt="people-icon" src={peopleIcon} width={15} height={15} />
                   {members}
                 </div>
                 {location === '' || (
                   <div className={styles.location}>
-                    <Image alt="earth-icon" src={earthIcon} width={12} height={12} />
+                    <Image alt="earth-icon" src={earthIcon} width={15} height={15} />
                     {location}
                   </div>
                 )}

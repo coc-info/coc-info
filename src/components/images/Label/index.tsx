@@ -9,8 +9,8 @@ interface LabelProps {
 
 export default function Label({ name, url, size = 'default' }: LabelProps) {
   const SIZE_TABLE = {
-    default: 32,
-    small: 32,
+    default: 30,
+    small: 30,
     medium: 48,
     large: 64,
   } as const;

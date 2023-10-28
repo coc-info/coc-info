@@ -15,7 +15,7 @@
       align-items: center;
 
       > .level {
-        @include primaryFont.primary-14px;
+        @include primaryFont.primary-15px;
         color: colors.$white;
         width: 40px;
       }
@@ -36,12 +36,12 @@
             gap: 4px;
 
             > .clanName {
-              @include primaryFont.primary-14px;
+              @include primaryFont.primary-15px;
               color: colors.$white;
             }
 
             > .clanTag {
-              @include primaryFont.primary-10px;
+              @include primaryFont.primary-13px;
               color: colors.$dark-gray;
             }
           }
@@ -50,14 +50,14 @@
             display: flex;
             gap: 10px;
             > .members {
-              @include primaryFont.primary-12px;
+              @include primaryFont.primary-13px;
               display: flex;
               align-items: center;
               gap: 4px;
             }
 
             > .location {
-              @include primaryFont.primary-12px;
+              @include primaryFont.primary-13px;
               display: flex;
               align-items: center;
               gap: 4px;
