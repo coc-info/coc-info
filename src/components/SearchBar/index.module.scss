@@ -1,6 +1,12 @@
 @use '@/styles/colors';
 @use '@/styles/fonts/primaryFont';
 
+.searchBarWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .searchBar {
   width: 100%;
   padding: 0 20px;
@@ -28,4 +34,10 @@
     background-color: transparent;
     border: none;
   }
+}
+
+.invalidatedMessage {
+  padding: 0 20px;
+  @include primaryFont.primary-13px;
+  color: colors.$negative-color;
 }

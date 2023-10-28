@@ -1,26 +1,27 @@
 import { fetchToCocApi } from '.';
 import { createQueryString } from './utils/createQueryString';
 
-interface SearchedClansList {
-  items: {
-    clanLevel: number;
-    badgeUrls: {
+export interface SearchedClanInfo {
+  clanLevel: number;
+  badgeUrls: {
+    small: string;
+    medium: string;
+    large: string;
+  };
+  name: string;
+  tag: string;
+  members: number;
+  location?: { name: string };
+  labels: {
+    name: string;
+    iconUrls: {
       small: string;
       medium: string;
-      large: string;
     };
-    name: string;
-    tag: string;
-    members: number;
-    location?: { name: string };
-    labels: {
-      name: string;
-      iconUrls: {
-        small: string;
-        medium: string;
-      };
-    }[];
   }[];
+}
+interface ClanSearchResult {
+  items: SearchedClanInfo[];
 }
 
 interface Options {
@@ -29,16 +30,16 @@ interface Options {
   after?: string;
 }
 
-export async function searchClans(options: Options): Promise<[Response, SearchedClansList]> {
+export async function searchClans(options: Options): Promise<[Response, ClanSearchResult]> {
   const queries = createQueryString(options);
 
   const path = `/clans?${queries}`;
 
   try {
     const res = await fetchToCocApi(path);
-    const data = await res.json();
+    const clanSearchResult = await res.json();
 
-    return [res, data];
+    return [res, clanSearchResult];
   } catch (e) {
     console.error(e);
     throw e;
