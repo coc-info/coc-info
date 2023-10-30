@@ -1,10 +1,11 @@
-import { ClanMember } from '@/utils/coc-api/fetchClanInfo';
+import { ClanMember as _ClanMember } from '@/utils/coc-api/fetchClanInfo';
 import styles from './index.module.scss';
 
 import Member from './Member';
+import { PlayerInfo } from '@/utils/coc-api/fetchPlayerInfo';
 
 interface MemberListProps {
-  memberList: ClanMember[];
+  memberList: PlayerInfo[];
 }
 
 export default async function MemberList({ memberList }: MemberListProps) {
@@ -18,8 +19,8 @@ export default async function MemberList({ memberList }: MemberListProps) {
         </tr>
       </thead>
       <tbody>
-        {memberList.map((member) => {
-          return <Member key={member.tag} member={member} />;
+        {memberList.map((member, i) => {
+          return <Member key={member.tag} rank={i + 1} member={member} />;
         })}
       </tbody>
     </table>

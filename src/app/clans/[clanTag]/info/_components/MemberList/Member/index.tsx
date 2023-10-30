@@ -18,10 +18,11 @@ import th3Image from '@/images/game-images/structure/town-hall/town-hall-3.webp'
 import th2Image from '@/images/game-images/structure/town-hall/town-hall-2.webp';
 import th1Image from '@/images/game-images/structure/town-hall/town-hall-1.webp';
 
-import { ClanMember } from '@/utils/coc-api/fetchClanInfo';
+import { PlayerInfo } from '@/utils/coc-api/fetchPlayerInfo';
 
 interface MemberProps {
-  member: ClanMember;
+  rank: number;
+  member: PlayerInfo;
 }
 
 // 임시. 나중에 리펙토링 예정
@@ -43,8 +44,8 @@ const TH_TIMAGE_TABLE = [
   th15Image,
 ];
 
-export default function Member({ member }: MemberProps) {
-  const { tag, clanRank, name, role, trophies, league } = member;
+export default function Member({ rank, member }: MemberProps) {
+  const { tag, name, role, trophies, league } = member;
 
   const ROLE_TABLE: { [key: string]: string } = {
     leader: '대표',
@@ -55,7 +56,7 @@ export default function Member({ member }: MemberProps) {
 
   return (
     <tr className={styles.member}>
-      <td>{clanRank}</td>
+      <td>{rank}</td>
       <td className={styles.townhall}>
         <div className={styles.townhallImageWrapper}>
           <Image alt={`${name}의 마을회관`} src={TH_TIMAGE_TABLE[member.townHallLevel - 1]} height={32} />

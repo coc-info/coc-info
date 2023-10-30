@@ -9,12 +9,14 @@ import MemberList from './_components/MemberList';
 import { fetchClanInfo } from '@/utils/coc-api/fetchClanInfo';
 import { fetchClanWarLog } from '@/utils/coc-api/fetchClanWarLog';
 import WarLogPrivate from './_components/WarLogPrivate';
+import { fetchPlayerInfos } from '@/utils/coc-api/fetchPlayerInfos';
 
 export default async function Page({ params }: { params: { clanTag: string } }) {
   const clanTag = decodeURIComponent(params.clanTag);
   const [clanInfoRes, clanInfo] = await fetchClanInfo(clanTag);
   const [warLogRes, warLog] = await fetchClanWarLog(clanTag, { limit: 20 });
 
+  //map war log
   let results: ('win' | 'tie' | 'lose')[] = [];
   if (warLogRes.status === 200) {
     results = warLog.items.reduce<('win' | 'tie' | 'lose')[]>((results, item) => {
@@ -26,6 +28,7 @@ export default async function Page({ params }: { params: { clanTag: string } }) 
   const recentRecords = results.slice(0, 10);
   recentRecords.reverse();
 
+  //calc tatal donations
   const [donations, donationsReceived] = clanInfo.memberList.reduce(
     (acc, member) => {
       const { donations, donationsReceived } = member;
@@ -33,6 +36,16 @@ export default async function Page({ params }: { params: { clanTag: string } }) 
     },
     [0, 0]
   );
+
+  //map player
+  const sotedMemberList = [...clanInfo.memberList];
+  sotedMemberList.sort((a, b) => a.clanRank - b.clanRank);
+
+  const playerTagList = sotedMemberList.slice(0, 10).map((member) => {
+    return member.tag;
+  });
+
+  const playerInfos = (await fetchPlayerInfos(playerTagList)).map(([, playerInfo]) => playerInfo);
 
   return (
     <main className={styles.main}>
@@ -69,7 +82,7 @@ export default async function Page({ params }: { params: { clanTag: string } }) 
           builderBaseTrophies={clanInfo.requiredBuilderBaseTrophies}
         />
         <Activities donations={donations} donationsReceived={donationsReceived} labels={clanInfo.labels} />
-        <MemberList memberList={clanInfo.memberList} />
+        <MemberList memberList={playerInfos} />
       </div>
     </main>
   );

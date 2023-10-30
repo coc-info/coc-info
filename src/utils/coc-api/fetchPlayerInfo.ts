@@ -1,6 +1,22 @@
 import { fetchToCocApi } from '.';
 
-interface PlayerInfo {
+export interface PlayerInfo {
+  tag: string;
+  name: string;
+  role: string;
+  expLevel: number;
+  league: {
+    id: number;
+    name: string;
+    iconUrls: {
+      tiny: string;
+      small: string;
+      medium: string;
+    };
+  };
+  trophies: number;
+  donations: number;
+  donationsReceived: number;
   townHallLevel: number;
 }
 

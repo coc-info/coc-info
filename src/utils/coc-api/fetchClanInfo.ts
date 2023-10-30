@@ -61,23 +61,12 @@ export interface ClanMember {
   clanRank: number;
   donations: number;
   donationsReceived: number;
-
-  // coc-api/players/[tag]에서 얻을 수 있는 속성
-  townHallLevel: number;
 }
 
 export async function fetchClanInfo(tag: string): Promise<[Response, ClanInfo]> {
   try {
     const res = await fetchToCocApi(`/clans/${encodeURIComponent(tag)}`);
     const clanInfo = (await res.json()) as ClanInfo;
-
-    const playerInfos = await fetchPlayerInfos(clanInfo.memberList.map((member) => member.tag));
-
-    clanInfo.memberList.forEach((member, i) => {
-      const [res, playerInfo] = playerInfos[i];
-
-      member.townHallLevel = playerInfo.townHallLevel;
-    });
 
     return [res, clanInfo];
   } catch (e) {
