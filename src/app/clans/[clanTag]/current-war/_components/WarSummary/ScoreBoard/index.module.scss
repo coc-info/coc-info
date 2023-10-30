@@ -1,0 +1,33 @@
+@use '@/styles/fonts/primaryFont';
+@use '@/styles/colors';
+@use '@/styles/background';
+
+.scoreBoard {
+  flex-basis: 40%;
+  display: grid;
+  grid-template: 1fr 1fr / 1fr auto 1fr;
+  justify-items: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.leftTeam {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.rightTeam {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.stars {
+  @include primaryFont.primary-18px;
+  color: primaryFont.$primary-emphasized-color;
+}
+
+.destruction {
+  @include primaryFont.primary-15px;
+}

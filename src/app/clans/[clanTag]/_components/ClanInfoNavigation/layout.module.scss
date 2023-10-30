@@ -1,0 +1,33 @@
+@use '@/styles/colors';
+@use '@/styles/screen';
+@use '@/styles/fonts/primaryFont';
+
+.navigationContainer {
+  background-color: colors.$light-black;
+  display: flex;
+  justify-content: center;
+}
+
+.navigation {
+  width: 100%;
+  max-width: screen.$mobile-max-size;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+
+  > a {
+    @include primaryFont.primary-15px;
+    line-height: 100%;
+    text-decoration: none;
+    padding: 7px 0;
+
+    > span {
+      display: block;
+      padding: 8px 4px 6px;
+    }
+
+    &.active > span {
+      border-bottom: 2px solid colors.$gray;
+    }
+  }
+}

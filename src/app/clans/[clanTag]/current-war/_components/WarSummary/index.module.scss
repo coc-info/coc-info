@@ -1,0 +1,65 @@
+@use '@/styles/fonts/primaryFont';
+@use '@/styles/colors';
+@use '@/styles/background';
+
+.warSummary {
+  @include primaryFont.primary-15px;
+  @include background.content;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+
+  gap: 30px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+
+  > .warState {
+    &--war {
+      color: colors.$negative-color;
+    }
+
+    &--preparation {
+      color: colors.$positive-color;
+    }
+  }
+}
+
+.middle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  > .clanWrapper {
+    flex-basis: 30%;
+  }
+
+  > .scoreBoardWrapper {
+    flex-basis: 40%;
+
+    > .versus {
+      @include primaryFont.primary-24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+
+  > .attacks,
+  > .versus {
+    @include primaryFont.primary-15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+  }
+}
