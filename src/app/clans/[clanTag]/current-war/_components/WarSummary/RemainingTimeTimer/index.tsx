@@ -32,16 +32,17 @@ export function RemainingTimeTimer({ until }: RemainingTimeTimerProps) {
     return `${[hourText, minText, secText].join('')}남음`;
   };
 
-  const [remaining, setRemaining] = useState(clacTimeRemaining(until));
+  const [remaining, setRemaining] = useState('');
 
   useEffect(() => {
+    setRemaining(clacTimeRemaining(until));
     const intervalId = setInterval(() => {
       setRemaining(clacTimeRemaining(until));
     }, 1000);
     return () => {
       clearInterval(intervalId);
     };
-  });
+  }, []);
 
   return <div>{remaining}</div>;
 }

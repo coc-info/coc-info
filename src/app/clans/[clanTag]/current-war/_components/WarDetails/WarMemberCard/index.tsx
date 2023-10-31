@@ -68,9 +68,9 @@ export default function WarMemberCard({ warMember, reverse = false }: WarMemberC
         <Image alt="townhall-image" src={TH_TIMAGE_TABLE[townhallLevel - 1]} height={32} />
       </div>
 
-      {/* middle */}
       {bestOpponentAttack ? (
         <>
+          {/* middle */}
           <div className={`${styles.middle} ${reverse ? styles.reverse : ''}`}>
             <span>{bestOpponentAttack.destructionPercentage}%</span>
             <div className={styles.stars}>
