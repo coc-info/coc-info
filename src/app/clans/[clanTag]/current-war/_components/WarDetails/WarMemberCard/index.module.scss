@@ -61,3 +61,12 @@
     gap: 5px;
   }
 }
+
+.notInvade {
+  display: flex;
+  flex-direction: row-reverse;
+
+  &.reverse {
+    flex-direction: row;
+  }
+}

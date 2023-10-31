@@ -1,7 +1,7 @@
 import styles from './index.module.scss';
 
 import { ClanInSummary } from './ClanInSummary';
-import { ScoreBoard } from './ScoreBoard';
+import ScoreBoard from './ScoreBoard';
 
 import swordIcon from '@/images/icons/sword.svg';
 import versusIcon from '@/images/icons/versus.svg';
@@ -19,7 +19,7 @@ interface Clan {
 }
 
 interface WarSummaryProps {
-  state: 'inWar' | 'preparation';
+  state: 'inWar' | 'preparation' | 'warEnded';
   startTime: string;
   endTime: string;
   teamSize: number;
@@ -28,7 +28,7 @@ interface WarSummaryProps {
   rightClan: Clan;
 }
 
-export function WarSummary({
+export default function WarSummary({
   state,
   startTime,
   endTime,
@@ -41,11 +41,13 @@ export function WarSummary({
     <div className={styles.warSummary}>
       {/*top*/}
       <div className={styles.top}>
-        <RemainingTimeTimer until={state === 'inWar' ? endTime : startTime} />
-        {state === 'inWar' ? (
+        <RemainingTimeTimer until={state === 'preparation' ? startTime : endTime} />
+        {state === 'preparation' ? (
+          <div className={styles[`warState--preparation`]}>준비일</div>
+        ) : state === 'inWar' ? (
           <div className={styles[`warState--war`]}>전쟁일</div>
         ) : (
-          <div className={styles[`warState--preparation`]}>준비일</div>
+          <div className={styles[`warState--war`]}>전쟁 종료</div>
         )}
       </div>
 
@@ -55,17 +57,17 @@ export function WarSummary({
           <ClanInSummary badgeUrl={leftClan.badgeUrl} name={leftClan.name} location={leftClan.location} />
         </div>
         <div className={styles.scoreBoardWrapper}>
-          {state === 'inWar' ? (
-            <ScoreBoard
-              leftTeam={{ stars: leftClan.stars, destructionPercentage: leftClan.destructionPercetage }}
-              rightTeam={{ stars: rightClan.stars, destructionPercentage: rightClan.destructionPercetage }}
-            />
-          ) : (
+          {state === 'preparation' ? (
             <div className={styles.versus}>
               <span>{teamSize}</span>
               <Image alt="versus-icon" src={versusIcon} width={24} height={24} />
               <span>{teamSize}</span>
             </div>
+          ) : (
+            <ScoreBoard
+              leftTeam={{ stars: leftClan.stars, destructionPercentage: leftClan.destructionPercetage }}
+              rightTeam={{ stars: rightClan.stars, destructionPercentage: rightClan.destructionPercetage }}
+            />
           )}
         </div>
         <div className={styles.clanWrapper}>
@@ -74,7 +76,7 @@ export function WarSummary({
       </div>
 
       {/*bottom */}
-      {state === 'inWar' && (
+      {state === 'preparation' || (
         <div className={styles.bottom}>
           <div className={styles.attacks}>
             <Image alt="sword-icon" src={swordIcon} width={15} height={15} />

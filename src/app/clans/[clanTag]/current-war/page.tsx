@@ -1,11 +1,12 @@
 import { fetchCurrentWarOfClan } from '@/utils/coc-api/fetchCurrentWarOfClan';
-import { WarSummary } from './_components/WarSummary';
+import WarSummary from './_components/WarSummary';
 import styles from './page.module.scss';
 import { fetchClanInfo } from '@/utils/coc-api/fetchClanInfo';
-import { WarDetails } from './_components/WarDetails';
+import WarDetails from './_components/WarDetails';
+import getCurrentWarInfo from '@/utils/coc-api/requester/getCurrentWarInfo';
 
 export default async function Page({ params }: { params: { clanTag: string } }) {
-  const [, warData] = await fetchCurrentWarOfClan(decodeURIComponent(params.clanTag));
+  const warData = await getCurrentWarInfo(decodeURIComponent(params.clanTag));
   const [[, clanInfo], [, opponentInfo]] = await Promise.all([
     fetchClanInfo(warData.clan.tag),
     fetchClanInfo(warData.opponent.tag),
@@ -42,7 +43,7 @@ export default async function Page({ params }: { params: { clanTag: string } }) 
                 location: opponentInfo.location?.name,
               }}
             />
-            <WarDetails />
+            <WarDetails clanMembers={warData.clan.members} opponentMembers={warData.opponent.members} />
           </>
         )}
       </section>

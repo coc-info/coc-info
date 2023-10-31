@@ -23,6 +23,8 @@ import th3Image from '@/images/game-images/structure/town-hall/town-hall-3.webp'
 import th2Image from '@/images/game-images/structure/town-hall/town-hall-2.webp';
 import th1Image from '@/images/game-images/structure/town-hall/town-hall-1.webp';
 
+import type { WarMember } from '@/utils/coc-api/requester/types/WarMember';
+
 const TH_TIMAGE_TABLE = [
   th1Image,
   th2Image,
@@ -42,29 +44,18 @@ const TH_TIMAGE_TABLE = [
 ];
 
 interface WarMemberCardProps {
-  name: string;
-  bestOpponentAttack: {
-    opponentName: string;
-    stars: number;
-    destructionPercentage: number;
-  };
-  mapPosition: number;
-  townhallLever: number;
-  opponentAttacks: number;
+  warMember: WarMember;
   reverse?: boolean;
 }
 
-export default function WarMemberCard({
-  name,
-  bestOpponentAttack,
-  mapPosition,
-  townhallLever,
-  opponentAttacks,
-  reverse = false,
-}: WarMemberCardProps) {
+export default function WarMemberCard({ warMember, reverse = false }: WarMemberCardProps) {
+  const { name, bestOpponentAttack, mapPosition, townhallLevel, opponentAttacks } = warMember;
+
   const resultsOfStars = [false, false, false];
-  for (let i = 0; i < bestOpponentAttack.stars; i++) {
-    resultsOfStars[i] = true;
+  if (bestOpponentAttack !== undefined) {
+    for (let i = 0; i < bestOpponentAttack.stars; i++) {
+      resultsOfStars[i] = true;
+    }
   }
 
   return (
@@ -74,34 +65,42 @@ export default function WarMemberCard({
         <div>
           {mapPosition}. {name}
         </div>
-        <Image alt="townhall-image" src={TH_TIMAGE_TABLE[townhallLever - 1]} height={32} />
+        <Image alt="townhall-image" src={TH_TIMAGE_TABLE[townhallLevel - 1]} height={32} />
       </div>
 
       {/* middle */}
-      <div className={`${styles.middle} ${reverse ? styles.reverse : ''}`}>
-        <span>{bestOpponentAttack.destructionPercentage}%</span>
-        <div className={styles.stars}>
-          {resultsOfStars.map((result) => {
-            return result ? (
-              <Image alt="star-icon" src={filledStarIcon} width={20} height={20} />
-            ) : (
-              <Image alt="star-icon" src={starIcon} width={20} height={20} />
-            );
-          })}
-        </div>
-      </div>
+      {bestOpponentAttack ? (
+        <>
+          <div className={`${styles.middle} ${reverse ? styles.reverse : ''}`}>
+            <span>{bestOpponentAttack.destructionPercentage}%</span>
+            <div className={styles.stars}>
+              {resultsOfStars.map((result, i) => {
+                return result ? (
+                  <Image key={i} alt="star-icon" src={filledStarIcon} width={20} height={20} />
+                ) : (
+                  <Image key={i} alt="star-icon" src={starIcon} width={20} height={20} />
+                );
+              })}
+            </div>
+          </div>
 
-      {/* bottom */}
-      <div className={`${styles.bottom} ${reverse ? styles.reverse : ''}`}>
-        <div className={styles.numOfInvade}>
-          <Image alt="shield-icon" src={shieldIcon} width={15} height={15} />
-          <span>{opponentAttacks}</span>
-        </div>
-        <div className={styles.invade}>
-          <Image alt="sword-icon" src={swordIcon} width={15} height={15} />
-          <span>2. Foobar</span>
-        </div>
-      </div>
+          {/* bottom */}
+          <div className={`${styles.bottom} ${reverse ? styles.reverse : ''}`}>
+            <div className={styles.numOfInvade}>
+              <Image alt="shield-icon" src={shieldIcon} width={15} height={15} />
+              <span>{opponentAttacks}</span>
+            </div>
+            <div className={styles.invade}>
+              <Image alt="sword-icon" src={swordIcon} width={15} height={15} />
+              <span>
+                {bestOpponentAttack.attackerMapPosition}. {bestOpponentAttack.attackerName}
+              </span>
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className={`${styles.notInvade} ${reverse ? styles.reverse : ''}`}>공격 받지 않음</div>
+      )}
     </div>
   );
 }

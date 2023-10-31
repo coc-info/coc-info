@@ -62,14 +62,14 @@ export default function Member({ rank, member }: MemberProps) {
           <Image alt={`${name}의 마을회관`} src={TH_TIMAGE_TABLE[member.townHallLevel - 1]} height={32} />
         </div>
       </td>
-      <td className={styles.member}>
+      <td className={styles.memberInfo}>
         <div>{name}</div>
         <div className={styles.role}>{ROLE_TABLE[role]}</div>
       </td>
 
       <td className={styles.trophies}>
         <div className={styles.trophiesWrapper}>
-          <Image alt="리그 뱃지" src={league.iconUrls.small} width={25} height={25} />
+          {league && <Image alt="리그 뱃지" src={league.iconUrls.small} width={25} height={25} />}
           <span>{trophies.toLocaleString()}</span>
         </div>
       </td>

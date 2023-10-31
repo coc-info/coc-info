@@ -16,7 +16,7 @@ interface ScoreBoardProps {
   };
 }
 
-export function ScoreBoard({ leftTeam, rightTeam }: ScoreBoardProps) {
+export default function ScoreBoard({ leftTeam, rightTeam }: ScoreBoardProps) {
   const round = (percentage: number) => {
     if (percentage === 0) return 0;
     return Math.round(percentage * 100) / 100;

@@ -5,7 +5,7 @@ export interface PlayerInfo {
   name: string;
   role: string;
   expLevel: number;
-  league: {
+  league?: {
     id: number;
     name: string;
     iconUrls: {
