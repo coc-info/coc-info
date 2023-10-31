@@ -26,7 +26,7 @@ export default function Item({ tag, rank, level, badgeUrl, clanName, members, tr
         </Link>
       </td>
       <td>{members}</td>
-      <td>{trophies}</td>
+      <td>{trophies.toLocaleString()}</td>
     </tr>
   );
 }

@@ -40,7 +40,7 @@ export default function WarRecords({ wins, losses, ties, winStreak, recentRecord
             })}
           </div>
         </div>
-        <button className={styles.moreDetails}>전적 자세히</button>
+        {/* <button className={styles.moreDetails}>전적 자세히</button> */}
       </div>
     </div>
   );
