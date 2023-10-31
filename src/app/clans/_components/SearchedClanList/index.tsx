@@ -1,11 +1,12 @@
 import styles from './index.module.scss';
 
 import ClanListItem from './ClanListItem.tsx';
-import { SearchedClanInfo } from '@/utils/coc-api/searchClans';
+import { Clan } from '@/utils/coc-api/requester/types/Clan';
+
 // import Link from 'next/link';
 
 interface SearchedClanListProps {
-  clanList: SearchedClanInfo[];
+  clanList: Clan[];
 }
 
 export default async function SearchedClanList({ clanList }: SearchedClanListProps) {
