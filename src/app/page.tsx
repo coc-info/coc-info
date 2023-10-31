@@ -4,13 +4,13 @@ import Image from 'next/image';
 import LeaderBoard from '../components/LeaderBoard';
 import SearchBar from '../components/SearchBar';
 
-import logo from '@/images/logo.png';
+import logoLarge from '@/images/logo--large.png';
 
 export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.tempLogo}>
-        <Image alt="logo" src={logo} height={60} />
+        <Image alt="logo" src={logoLarge} height={60} />
       </div>
       <div className={styles.searchBarArea}>
         <SearchBar />

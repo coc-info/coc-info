@@ -16,9 +16,9 @@ export default function Header({ logoHidden = false }: HeaderProps) {
     <header className={styles.headerArea}>
       <div className={styles.header}>
         <LogoContainer />
-        <button className={styles.menuButton}>
+        {/* <button className={styles.menuButton}>
           <Image alt="hameberger-icon" src={hambergerIcon} />
-        </button>
+        </button> */}
       </div>
     </header>
   );
