@@ -10,10 +10,16 @@ import { fetchClanInfo } from '@/utils/coc-api/fetchClanInfo';
 import { fetchClanWarLog } from '@/utils/coc-api/fetchClanWarLog';
 import WarLogPrivate from './_components/WarLogPrivate';
 import { fetchPlayerInfos } from '@/utils/coc-api/fetchPlayerInfos';
+import { redirect } from 'next/navigation';
 
 export default async function Page({ params }: { params: { clanTag: string } }) {
   const clanTag = decodeURIComponent(params.clanTag);
+
   const [clanInfoRes, clanInfo] = await fetchClanInfo(clanTag);
+  if (clanInfoRes.status !== 200) {
+    redirect('/clan-not-found');
+  }
+
   const [warLogRes, warLog] = await fetchClanWarLog(clanTag, { limit: 20 });
 
   //map war log
@@ -41,7 +47,7 @@ export default async function Page({ params }: { params: { clanTag: string } }) 
   const sotedMemberList = [...clanInfo.memberList];
   sotedMemberList.sort((a, b) => a.clanRank - b.clanRank);
 
-  const playerTagList = sotedMemberList.slice(0, 10).map((member) => {
+  const playerTagList = sotedMemberList.map((member) => {
     return member.tag;
   });
 
