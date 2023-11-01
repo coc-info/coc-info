@@ -9,8 +9,13 @@ import logoLarge from '@/images/logo--large.png';
 export default function Home() {
   return (
     <main className={styles.main}>
-      <div className={styles.tempLogo}>
-        <Image alt="logo" src={logoLarge} height={60} />
+      <div className={styles.logoArea}>
+        <div className={styles.withBeta}>
+          <Image alt="logo" src={logoLarge} height={60} />
+          <div className={styles.beta}>
+            <span>.BETA</span>
+          </div>
+        </div>
       </div>
       <div className={styles.searchBarArea}>
         <SearchBar />

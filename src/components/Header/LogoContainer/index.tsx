@@ -12,9 +12,12 @@ export default function LogoContainer() {
   const isHidden = pathname === '/';
   return (
     <h1 className={`${styles.logoContainer} ${isHidden ? styles.hidden : ''}`}>
-      <Link href="/">
-        <Image alt="logo" src={logo} />
-      </Link>
+      <div className={styles.withBeta}>
+        <Link href="/">
+          <Image alt="logo" src={logo} />
+        </Link>
+        <span>.BETA</span>
+      </div>
     </h1>
   );
 }

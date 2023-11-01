@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from './index.module.scss';
 
 export default function Footer() {
@@ -6,8 +7,15 @@ export default function Footer() {
       <div className={styles.footer}>
         <p>ⓒ 2023 cocinfo.com</p>
         <p>
-          본 사이트는 게임 Clash Of Clans의 비공식 팬사이트입니다. 본 사이트에서 사용하는 Clash Of Clans와 관련된 모든
-          이미지, 로고 등의 콘텐츠는 SUPERCELL의 지적 재산권에 속합니다.
+          본 사이트는 게임 Clash Of Clans의 팬사이트입니다. 이 콘텐츠는 비공식적이며 Supercell에 의해 승인되지
+          않았습니다.
+          <br /> 더 자세한 정보는 Supercell 팬 콘텐츠 정책(
+          {
+            <Link href="https://www.supercell.com/en/fan-content-policy/ko">
+              www.supercell.com/en/fan-content-policy/ko
+            </Link>
+          }
+          )을 참조해 주시기 바랍니다.
         </p>
       </div>
     </footer>

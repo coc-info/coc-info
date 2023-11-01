@@ -1,4 +1,4 @@
-@use '../../styles/colors';
+@use '@/styles/colors';
 
 .headerArea {
   background-color: colors.$black;
@@ -13,17 +13,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.tempLogo {
-  color: colors.$white;
-  font-size: 20px;
-  font-weight: 700;
-  text-decoration: none;
-
-  &--hidden {
-    visibility: hidden;
-  }
 }
 
 .menuButton {

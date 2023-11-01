@@ -2,6 +2,8 @@ import styles from './index.module.scss';
 
 import Image from 'next/image';
 
+import unrankedIcon from '@/images/game-images/icons/league-badges/unranked.webp';
+
 import th15Image from '@/images/game-images/structure/town-hall/town-hall-15.webp';
 import th14Image from '@/images/game-images/structure/town-hall/town-hall-14.webp';
 import th13Image from '@/images/game-images/structure/town-hall/town-hall-13.webp';
@@ -69,7 +71,13 @@ export default function Member({ rank, member }: MemberProps) {
 
       <td className={styles.trophies}>
         <div className={styles.trophiesWrapper}>
-          {league && <Image alt="리그 뱃지" src={league.iconUrls.small} width={25} height={25} />}
+          {league ? (
+            <Image alt="리그 뱃지" src={league.iconUrls.small} width={25} height={25} />
+          ) : (
+            <div className={styles.unrankedIconWrapper}>
+              <Image alt="리그 뱃지" src={unrankedIcon} width={20} height={20} />
+            </div>
+          )}
           <span>{trophies.toLocaleString()}</span>
         </div>
       </td>

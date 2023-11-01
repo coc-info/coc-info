@@ -17,5 +17,11 @@
 
   > p {
     @include primaryFont.primary-13px;
+    line-height: 1.3;
+    word-break: keep-all;
+  }
+
+  a {
+    @include primaryFont.primary-13px;
   }
 }

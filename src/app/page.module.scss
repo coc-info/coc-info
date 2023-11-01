@@ -12,16 +12,29 @@
   background-color: colors.$pale-black;
 }
 
+.logoArea {
+  color: colors.$white;
+  font-size: 30px;
+  font-weight: 700;
+
+  > .withBeta {
+    @include primaryFont.primary-15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+
+    > .beta {
+      height: 24px;
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+}
+
 .searchBarArea {
   width: 100%;
   max-width: 768px;
   padding: 0 20px;
-}
-
-.tempLogo {
-  color: colors.$white;
-  font-size: 30px;
-  font-weight: 700;
 }
 
 .leaderBoardArea {
