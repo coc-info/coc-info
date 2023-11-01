@@ -17,7 +17,7 @@ export default async function LeaderBoard() {
         </tr>
       </thead>
       <tbody>
-        {data.items.map((item) => {
+        {data.items?.map((item) => {
           return (
             <Item
               key={item.tag}
