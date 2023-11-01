@@ -27,7 +27,7 @@ export async function fetchLeaderboardOfClans(options?: Options): Promise<[Respo
   try {
     const res = await fetchToCocApi(path);
     const data = await res.json();
-
+    if (res.status !== 200) console.log(new Error(`${res.status} ${res.statusText}`));
     return [res, data];
   } catch (e) {
     console.error(e);
