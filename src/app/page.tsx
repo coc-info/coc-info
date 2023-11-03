@@ -4,14 +4,14 @@ import Image from 'next/image';
 import LeaderBoard from '../components/LeaderBoard';
 import SearchBar from '../components/SearchBar';
 
-import logoLarge from '@/images/logo--large.png';
+import logo from '@/images/logo.svg';
 
 export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.logoArea}>
         <div className={styles.withBeta}>
-          <Image alt="logo" src={logoLarge} height={60} />
+          <Image alt="logo" src={logo} height={60} />
           <div className={styles.beta}>
             <span>.BETA</span>
           </div>
