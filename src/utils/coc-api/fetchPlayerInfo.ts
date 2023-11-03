@@ -22,7 +22,7 @@ export interface PlayerInfo {
 
 export async function fetchPlayerInfo(tag: string): Promise<[Response, PlayerInfo]> {
   try {
-    const res = await fetchToCocApi(`/players/${encodeURIComponent(tag)}`);
+    const res = await fetchToCocApi(`/players/${encodeURIComponent(tag)}`, { next: { revalidate: 5 } });
 
     const playerInfo = await res.json();
 

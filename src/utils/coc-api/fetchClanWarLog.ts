@@ -24,7 +24,9 @@ interface Data {
 export async function fetchClanWarLog(clanTag: string, options: Options = {}): Promise<[Response, Data]> {
   const queries = createQueryString(options);
 
-  const res = await fetchToCocApi(`/clans/${encodeURIComponent(clanTag)}/warlog?${queries}`);
+  const res = await fetchToCocApi(`/clans/${encodeURIComponent(clanTag)}/warlog?${queries}`, {
+    next: { revalidate: 5 },
+  });
   const data = await res.json();
 
   return [res, data];

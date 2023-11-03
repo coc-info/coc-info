@@ -65,7 +65,7 @@ export interface ClanMember {
 
 export async function fetchClanInfo(tag: string): Promise<[Response, ClanInfo]> {
   try {
-    const res = await fetchToCocApi(`/clans/${encodeURIComponent(tag)}`);
+    const res = await fetchToCocApi(`/clans/${encodeURIComponent(tag)}`, { next: { revalidate: 5 } });
     const clanInfo = (await res.json()) as ClanInfo;
 
     return [res, clanInfo];

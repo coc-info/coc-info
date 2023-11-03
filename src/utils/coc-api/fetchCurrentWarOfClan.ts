@@ -53,7 +53,7 @@ export interface ClanWarOnApi {
 
 export async function fetchCurrentWarOfClan(clanTag: string): Promise<[Response, ClanWarOnApi]> {
   try {
-    const res = await fetchToCocApi(`/clans/${encodeURIComponent(clanTag)}/currentwar`);
+    const res = await fetchToCocApi(`/clans/${encodeURIComponent(clanTag)}/currentwar`, { next: { revalidate: 5 } });
     if (res.status !== 200) throw new Error(res.status + res.statusText);
     const currentWarData = await res.json();
 

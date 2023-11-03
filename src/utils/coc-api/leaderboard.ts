@@ -25,7 +25,7 @@ export async function fetchLeaderboardOfClans(options?: Options): Promise<[Respo
   const path = `/locations/${LOCATION_ID_OF_KR}/rankings/clans?${queries}`;
 
   try {
-    const res = await fetchToCocApi(path);
+    const res = await fetchToCocApi(path, { next: { revalidate: 5 } });
     const data = await res.json();
     if (res.status !== 200) throw new Error(`${res.status} ${res.statusText} api key: ${process.env.COC_API_KEY}`);
     return [res, data];

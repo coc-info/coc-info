@@ -24,7 +24,7 @@ export async function fetchClanList(options: Options): Promise<[Response, ClanLi
   const path = `/clans?${queries}`;
 
   try {
-    const res = await fetchToCocApi(path);
+    const res = await fetchToCocApi(path, { next: { revalidate: 5 } });
     const clanSearchResult = await res.json();
 
     if (res.status !== 200) throw new Error(`${res.status} ${res.statusText}`);
