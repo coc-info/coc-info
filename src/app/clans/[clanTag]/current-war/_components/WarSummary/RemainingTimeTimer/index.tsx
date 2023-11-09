@@ -42,7 +42,7 @@ export function RemainingTimeTimer({ until }: RemainingTimeTimerProps) {
     return () => {
       clearInterval(intervalId);
     };
-  }, []);
+  }, [until]);
 
   return <div>{remaining}</div>;
 }
