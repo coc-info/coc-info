@@ -1,12 +1,12 @@
-import { fetchClanInfo } from '../fetchClanInfo';
-import { ClanWarMemberOnApi, fetchCurrentWarOfClan } from '../fetchCurrentWarOfClan';
-import { ClanWar } from './types/ClanWar';
+import { fetchClanInfo } from '../requesters';
+import { ClanWarMemberOnApi, fetchCurrentWarOfClan } from '../requesters/clans/fetchCurrentWarOfClan';
+import { ClanWar } from '../requesters/types/ClanWar';
 
-import { WarMember } from './types/WarMember';
+import { WarMember } from '../requesters/types/WarMember';
 
-export default async function getCurrentWarInfo(clanTag: string): Promise<ClanWar> {
+export async function getCurrentWarInfo(clanTag: string): Promise<ClanWar> {
   const [res, clanWarInfo] = await fetchCurrentWarOfClan(clanTag);
-  const [[, clanInfo], [, opponentInfo]] = await Promise.all([
+  const [{ data: clanInfo }, { data: opponentInfo }] = await Promise.all([
     fetchClanInfo(clanWarInfo.clan.tag),
     fetchClanInfo(clanWarInfo.opponent.tag),
   ]);
@@ -33,12 +33,12 @@ export default async function getCurrentWarInfo(clanTag: string): Promise<ClanWa
     startTime,
     clan: {
       ..._clan,
-      location: clanInfo.location,
+      location: clanInfo?.location,
       members: clanMembers,
     },
     opponent: {
       ..._opponent,
-      location: opponentInfo.location,
+      location: opponentInfo?.location,
       members: opponentMembers,
     },
   };

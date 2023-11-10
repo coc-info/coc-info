@@ -9,29 +9,21 @@ import peopleIcon from '@/images/icons/people-icon.svg';
 import earthIcon from '@/images/icons/earth.svg';
 import Link from 'next/link';
 
+import { SearchedClan } from '@/utils/coc-api/types';
+
 interface ClanListItemProps {
-  level: number;
-  badgeUrl: string;
-  name: string;
-  tag: string;
-  members: number;
-  location: string;
-  labels: {
-    name: string;
-    iconUrls: {
-      small: string;
-    };
-  }[];
+  searchedClan: SearchedClan;
 }
 
-export default function ClanListItem({ level, badgeUrl, name, tag, members, location, labels }: ClanListItemProps) {
+export default function ClanListItem({ searchedClan }: ClanListItemProps) {
+  const { clanLevel, badgeUrls, name, tag, members, location, labels } = searchedClan;
   return (
     <li className={styles.clanListItem}>
       <Link className={styles.link} href={`/clans/${encodeURIComponent(tag)}/info`}>
         <div className={styles.clanInfo}>
-          <div className={styles.level}>Lv.{level}</div>
+          <div className={styles.level}>Lv.{clanLevel}</div>
           <div className={styles.rightInfo}>
-            <ClanBadge name="" url={badgeUrl} />
+            <ClanBadge name="" url={badgeUrls.medium} />
             <div>
               <div className={styles.clanIdentity}>
                 <div className={styles.clanName}>{name}</div>
@@ -42,7 +34,7 @@ export default function ClanListItem({ level, badgeUrl, name, tag, members, loca
                   <Image alt="people-icon" src={peopleIcon} width={15} height={15} />
                   {members}
                 </div>
-                {location === '' || (
+                {location !== undefined || (
                   <div className={styles.location}>
                     <Image alt="earth-icon" src={earthIcon} width={15} height={15} />
                     {location}

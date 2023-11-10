@@ -1,12 +1,12 @@
 import styles from './index.module.scss';
 
 import ClanListItem from './ClanListItem.tsx';
-import { Clan } from '@/utils/coc-api/requester/types/Clan';
+import { SearchedClan } from '@/utils/coc-api/types';
 
 // import Link from 'next/link';
 
 interface SearchedClanListProps {
-  clanList: Clan[];
+  clanList: SearchedClan[];
 }
 
 export default async function SearchedClanList({ clanList }: SearchedClanListProps) {
@@ -15,18 +15,7 @@ export default async function SearchedClanList({ clanList }: SearchedClanListPro
       {/* <Link href="/clans?name=혁명군&after=eyJwb3MiOjEwfQ">다음</Link> */}
       <ul className={styles.searchedClanList}>
         {clanList.map((clan) => {
-          return (
-            <ClanListItem
-              key={clan.tag}
-              level={clan.clanLevel}
-              badgeUrl={clan.badgeUrls.medium}
-              name={clan.name}
-              tag={clan.tag}
-              members={clan.members}
-              location={clan.location?.name ?? ''}
-              labels={clan.labels}
-            />
-          );
+          return <ClanListItem key={clan.tag} searchedClan={clan} />;
         })}
       </ul>
     </>

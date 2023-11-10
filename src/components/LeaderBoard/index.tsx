@@ -1,9 +1,14 @@
-import { fetchLeaderboardOfClans } from '@/utils/coc-api/leaderboard';
 import Item from './Item';
 import styles from './index.module.scss';
+import { getClanRankings } from '@/utils/coc-api';
+import { redirect } from 'next/navigation';
 
 export default async function LeaderBoard() {
-  const [res, data] = await fetchLeaderboardOfClans({ limit: 20 });
+  const { data } = await getClanRankings({ limit: 20 });
+
+  if (data === undefined) {
+    redirect('/404');
+  }
 
   return (
     <table className={styles.leaderBoard}>
@@ -18,18 +23,7 @@ export default async function LeaderBoard() {
       </thead>
       <tbody>
         {data.items?.map((item) => {
-          return (
-            <Item
-              key={item.tag}
-              tag={item.tag}
-              rank={item.rank}
-              level={item.clanLevel}
-              badgeUrl={item.badgeUrls.small}
-              clanName={item.name}
-              members={item.members}
-              trophies={item.clanPoints}
-            />
-          );
+          return <Item key={item.tag} clanRaking={item} />;
         })}
       </tbody>
     </table>

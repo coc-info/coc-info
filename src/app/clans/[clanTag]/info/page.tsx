@@ -6,17 +6,19 @@ import WarRecords from './_components/WarRecords';
 import JoiningRequirements from './_components/JoiningRequirements';
 import Activities from './_components/Activities';
 import MemberList from './_components/MemberList';
-import { fetchClanInfo } from '@/utils/coc-api/fetchClanInfo';
-import { fetchClanWarLog } from '@/utils/coc-api/fetchClanWarLog';
 import WarLogPrivate from './_components/WarLogPrivate';
-import { fetchPlayerInfos } from '@/utils/coc-api/fetchPlayerInfos';
+
+import { getClanInfo } from '@/utils/coc-api';
+import { fetchClanWarLog } from '@/utils/coc-api/requesters';
+import { fetchPlayerInfos } from '@/utils/coc-api/requesters';
 import { redirect } from 'next/navigation';
 
 export default async function Page({ params }: { params: { clanTag: string } }) {
   const clanTag = decodeURIComponent(params.clanTag);
 
-  const [clanInfoRes, clanInfo] = await fetchClanInfo(clanTag);
-  if (clanInfoRes.status !== 200) {
+  const { response, data: clanInfo } = await getClanInfo(clanTag);
+
+  if (response.status !== 200 || clanInfo === undefined) {
     redirect('/clan-not-found');
   }
 
@@ -72,8 +74,8 @@ export default async function Page({ params }: { params: { clanTag: string } }) 
         {clanInfo.isWarLogPublic ? (
           <WarRecords
             wins={clanInfo.warWins}
-            losses={clanInfo.warLosses}
-            ties={clanInfo.warTies}
+            losses={clanInfo.warLosses ?? 0}
+            ties={clanInfo.warTies ?? 0}
             winStreak={clanInfo.warWinStreak}
             recentRecords={recentRecords}
           />

@@ -1,10 +1,10 @@
 import WarSummary from './_components/WarSummary';
 import styles from './page.module.scss';
-import { fetchClanInfo } from '@/utils/coc-api/fetchClanInfo';
 import WarDetails from './_components/WarDetails';
-import getCurrentWarInfo from '@/utils/coc-api/requester/getCurrentWarInfo';
 
-import type { ClanWar } from '@/utils/coc-api/requester/types/ClanWar';
+import { getClanInfo, getCurrentWarInfo } from '@/utils/coc-api';
+
+import type { ClanWar } from '@/utils/coc-api/requesters/types/ClanWar';
 import { redirect } from 'next/navigation';
 
 export default async function Page({ params }: { params: { clanTag: string } }) {
@@ -19,9 +19,9 @@ export default async function Page({ params }: { params: { clanTag: string } }) 
   if (warData.state === 'notInWar') {
     redirect('./current-war/not-in-war');
   }
-  const [[, clanInfo], [, opponentInfo]] = await Promise.all([
-    fetchClanInfo(warData.clan.tag),
-    fetchClanInfo(warData.opponent.tag),
+  const [{ data: clanInfo }, { data: opponentInfo }] = await Promise.all([
+    getClanInfo(warData.clan.tag),
+    getClanInfo(warData.opponent.tag),
   ]);
   return (
     <main className={styles.main}>
@@ -39,7 +39,7 @@ export default async function Page({ params }: { params: { clanTag: string } }) 
             attacks: warData.clan.attacks,
             stars: warData.clan.stars,
             destructionPercetage: warData.clan.destructionPercentage,
-            location: clanInfo.location?.name,
+            location: clanInfo?.location?.name,
           }}
           rightClan={{
             tag: warData.opponent.tag,
@@ -48,7 +48,7 @@ export default async function Page({ params }: { params: { clanTag: string } }) 
             attacks: warData.opponent.attacks,
             stars: warData.opponent.stars,
             destructionPercetage: warData.opponent.destructionPercentage,
-            location: opponentInfo.location?.name,
+            location: opponentInfo?.location?.name,
           }}
         />
         <WarDetails clanMembers={warData.clan.members} opponentMembers={warData.opponent.members} />

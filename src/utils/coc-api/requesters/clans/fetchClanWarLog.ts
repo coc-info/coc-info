@@ -1,5 +1,5 @@
-import { fetchToCocApi } from '.';
-import { createQueryString } from './utils/createQueryString';
+import { fetchToCocApi } from '../fetchToCocApi';
+import { createQueryString } from '../../utils/createQueryString';
 
 interface Options {
   limit?: number;

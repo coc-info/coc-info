@@ -23,7 +23,7 @@ import th3Image from '@/images/game-images/structure/town-hall/town-hall-3.webp'
 import th2Image from '@/images/game-images/structure/town-hall/town-hall-2.webp';
 import th1Image from '@/images/game-images/structure/town-hall/town-hall-1.webp';
 
-import type { WarMember } from '@/utils/coc-api/requester/types/WarMember';
+import type { WarMember } from '@/utils/coc-api/requesters/types/WarMember';
 
 const TH_TIMAGE_TABLE = [
   th1Image,

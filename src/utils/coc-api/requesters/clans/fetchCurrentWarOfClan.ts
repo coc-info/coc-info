@@ -1,4 +1,4 @@
-import { fetchToCocApi } from '.';
+import { fetchToCocApi } from '../fetchToCocApi';
 
 export interface ClanWarAttack {
   order: number;

@@ -4,12 +4,12 @@ import SearchBar from '../../components/SearchBar';
 import SearchedClanList from './_components/SearchedClanList';
 
 import { redirect } from 'next/navigation';
-import { searchClans } from '@/utils/coc-api/requester/searchClans';
+import { searchClans } from '@/utils/coc-api/clans/searchClans';
 
 export default async function Page({ searchParams }: { searchParams: { name: string; after?: string } }) {
-  const { items } = await searchClans({ name: searchParams.name });
+  const { response, data } = await searchClans({ name: searchParams.name });
 
-  if (items.length === 0) {
+  if (data === undefined || data.items.length === 0) {
     redirect('/clan-not-found');
   }
 
@@ -18,7 +18,7 @@ export default async function Page({ searchParams }: { searchParams: { name: str
       <div className={styles.searchBarArea}>
         <SearchBar />
       </div>
-      <SearchedClanList clanList={items} />
+      <SearchedClanList clanList={data.items} />
     </main>
   );
 }
