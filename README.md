@@ -1,3 +1,4 @@
 # COC Info
 
-![Frame 1](https://github.com/coc-info/coc-info/assets/78804014/7928b96f-238f-4667-8ad2-b90986d8d060)
+## 시스템 아키텍처
+![시스템 아키텍처](https://github.com/coc-info/coc-info/assets/78804014/498c5b5f-d26c-48a9-b4fb-d80b9900d134)
