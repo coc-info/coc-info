@@ -2,7 +2,7 @@
 import { fetchClanInfo } from './clans/fetchClanInfo';
 import { fetchClans } from './clans/fetchClans';
 import { fetchClanWarLog } from './clans/fetchClanWarLog';
-import { fetchCurrentWarOfClan } from './clans/fetchCurrentWarOfClan';
+import { fetchCurrentWar } from './clans/fetchCurrentWar';
 
 // players
 import { fetchPlayerInfo } from './players/fetchPlayerInfo';
@@ -16,7 +16,7 @@ export {
   fetchClanInfo,
   fetchClans,
   fetchClanWarLog,
-  fetchCurrentWarOfClan,
+  fetchCurrentWar,
 
   // players
   fetchPlayerInfo,

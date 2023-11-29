@@ -10,6 +10,12 @@ import { ClanDistrictDataOnApi } from './clan/capital/ClanDistrictDataOnApi';
 import { PlayerHouseOnApi } from './clan/capital/PlayerHouseOnApi';
 import { PlayerHouseElementOnApi } from './clan/capital/PlayerHouseElementOnApi';
 
+// clan/war
+import { ClanWarOnApi, ClanWarNotInOnApi } from './clan/war/ClanWarOnApi';
+import { WarClanOnApi } from './clan/war/WarClanOnApi';
+import { ClanWarMemberOnApi } from './clan/war/ClanWarMemberOnApi';
+import { ClanWarAttackOnApi } from './clan/war/ClanWarAttackOnApi';
+
 // leagues
 import { LeagueOnApi } from './leagues/LeagueOnApi';
 import { BuilderBaseLeagueOnApi } from './leagues/BuilderBaseLeagueOnApi';
@@ -36,6 +42,13 @@ export type {
   ClanDistrictDataOnApi,
   PlayerHouseOnApi,
   PlayerHouseElementOnApi,
+
+  // clan/war
+  ClanWarOnApi,
+  ClanWarNotInOnApi,
+  WarClanOnApi,
+  ClanWarMemberOnApi,
+  ClanWarAttackOnApi,
 
   // leagues
   LeagueOnApi,

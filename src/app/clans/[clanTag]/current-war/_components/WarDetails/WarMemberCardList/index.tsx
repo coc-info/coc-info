@@ -2,11 +2,11 @@ import styles from './index.module.scss';
 
 import WarMemberCard from '../WarMemberCard';
 
-import type { WarMember } from '@/utils/coc-api/requesters/types/WarMember';
+import type { ClanWarMember } from '@/utils/coc-api/types';
 
 interface WarMemberCardListProps {
-  clanMembers: WarMember[];
-  opponentMembers: WarMember[];
+  clanMembers: ClanWarMember[];
+  opponentMembers: ClanWarMember[];
 }
 
 export default function WarMemberCardList({ clanMembers, opponentMembers }: WarMemberCardListProps) {

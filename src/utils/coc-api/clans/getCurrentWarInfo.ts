@@ -1,11 +1,22 @@
 import { fetchClanInfo } from '../requesters';
-import { ClanWarMemberOnApi, fetchCurrentWarOfClan } from '../requesters/clans/fetchCurrentWarOfClan';
-import { ClanWar } from '../requesters/types/ClanWar';
+import { fetchCurrentWar } from '../requesters/clans/fetchCurrentWar';
 
-import { WarMember } from '../requesters/types/WarMember';
+import { ClanWar, ClanWarNotIn } from '../types/clan/war/ClanWar';
+import { ClanWarMember } from '../types';
 
-export async function getCurrentWarInfo(clanTag: string): Promise<ClanWar> {
-  const [res, clanWarInfo] = await fetchCurrentWarOfClan(clanTag);
+import { ClanWarMemberOnApi } from '../requesters/types';
+import { ApiResult } from '../types/ApiResult';
+
+export async function getCurrentWarInfo(clanTag: string): Promise<ApiResult<ClanWar | ClanWarNotIn>> {
+  const { response, data: clanWarInfo } = await fetchCurrentWar(clanTag);
+  if (clanWarInfo === undefined) {
+    return {} as ApiResult<ClanWar | ClanWarNotIn>;
+  }
+
+  if (clanWarInfo.state === 'notInWar') {
+    return {} as ApiResult<ClanWar | ClanWarNotIn>;
+  }
+
   const [{ data: clanInfo }, { data: opponentInfo }] = await Promise.all([
     fetchClanInfo(clanWarInfo.clan.tag),
     fetchClanInfo(clanWarInfo.opponent.tag),
@@ -47,7 +58,7 @@ export async function getCurrentWarInfo(clanTag: string): Promise<ClanWar> {
 function mapMemberLists(
   clanMembers: ClanWarMemberOnApi[],
   opponentMembers: ClanWarMemberOnApi[]
-): [WarMember[], WarMember[]] {
+): [ClanWarMember[], ClanWarMember[]] {
   const clanMembersTable = new Map<string, { name: string; mapPosition: number }>();
   const opponentMembersTable = new Map<string, { name: string; mapPosition: number }>();
 
