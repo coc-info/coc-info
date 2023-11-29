@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className={styles.footerArea}>
       <div className={styles.footer}>
-        <p>ⓒ 2023 cocinfo.com</p>
+        <p>ⓒ 2023 cocinfo.net</p>
         <p>
           본 사이트는 게임 Clash Of Clans의 팬사이트입니다. 이 콘텐츠는 비공식적이며 Supercell에 의해 승인되지
           않았습니다.
