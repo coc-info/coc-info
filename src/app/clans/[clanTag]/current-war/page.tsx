@@ -1,57 +1,36 @@
 import WarSummary from './_components/WarSummary';
 import styles from './page.module.scss';
-import { fetchClanInfo } from '@/utils/coc-api/fetchClanInfo';
 import WarDetails from './_components/WarDetails';
-import getCurrentWarInfo from '@/utils/coc-api/requester/getCurrentWarInfo';
 
-import type { ClanWar } from '@/utils/coc-api/requester/types/ClanWar';
+import { getCurrentWar, getClan } from '@/utils/coc-api';
 import { redirect } from 'next/navigation';
 
 export default async function Page({ params }: { params: { clanTag: string } }) {
-  let warData: ClanWar;
-  try {
-    warData = await getCurrentWarInfo(decodeURIComponent(params.clanTag));
-  } catch (e) {
-    console.log(e);
+  const clanTag = decodeURIComponent(params.clanTag);
+  const result = await getCurrentWar({ tag: clanTag });
+  const { data: currentWar } = result;
+  if (currentWar === undefined) {
     redirect('./private-warlog');
   }
 
-  if (warData.state === 'notInWar') {
+  if (currentWar.state === 'notInWar') {
     redirect('./current-war/not-in-war');
   }
-  const [[, clanInfo], [, opponentInfo]] = await Promise.all([
-    fetchClanInfo(warData.clan.tag),
-    fetchClanInfo(warData.opponent.tag),
+
+  const [{ data: clan }, { data: opponent }] = await Promise.all([
+    getClan({ tag: currentWar.clan.tag }),
+    getClan({ tag: currentWar.opponent.tag }),
   ]);
+
+  if (clan === undefined || opponent === undefined) {
+    redirect('/500');
+  }
+
   return (
     <main className={styles.main}>
       <section className={styles.contentsArea}>
-        <WarSummary
-          state={warData.state}
-          startTime={warData.startTime}
-          endTime={warData.endTime}
-          teamSize={warData.teamSize}
-          attacksPerMember={warData.attacksPerMember}
-          leftClan={{
-            tag: warData.clan.tag,
-            name: warData.clan.name,
-            badgeUrl: warData.clan.badgeUrls.small,
-            attacks: warData.clan.attacks,
-            stars: warData.clan.stars,
-            destructionPercetage: warData.clan.destructionPercentage,
-            location: clanInfo.location?.name,
-          }}
-          rightClan={{
-            tag: warData.opponent.tag,
-            name: warData.opponent.name,
-            badgeUrl: warData.opponent.badgeUrls.small,
-            attacks: warData.opponent.attacks,
-            stars: warData.opponent.stars,
-            destructionPercetage: warData.opponent.destructionPercentage,
-            location: opponentInfo.location?.name,
-          }}
-        />
-        <WarDetails clanMembers={warData.clan.members} opponentMembers={warData.opponent.members} />
+        <WarSummary clanWar={currentWar} locations={{ clan: clan.location }} />
+        <WarDetails clanMembers={currentWar.clan.members} opponentMembers={currentWar.opponent.members} />
       </section>
     </main>
   );

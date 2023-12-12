@@ -20,11 +20,11 @@ import th3Image from '@/images/game-images/structure/town-hall/town-hall-3.webp'
 import th2Image from '@/images/game-images/structure/town-hall/town-hall-2.webp';
 import th1Image from '@/images/game-images/structure/town-hall/town-hall-1.webp';
 
-import { PlayerInfo } from '@/utils/coc-api/fetchPlayerInfo';
+import { Player } from '@/utils/coc-api/types/player/Player';
 
 interface MemberProps {
   rank: number;
-  member: PlayerInfo;
+  member: Player;
 }
 
 // 임시. 나중에 리펙토링 예정

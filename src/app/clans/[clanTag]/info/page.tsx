@@ -6,22 +6,25 @@ import WarRecords from './_components/WarRecords';
 import JoiningRequirements from './_components/JoiningRequirements';
 import Activities from './_components/Activities';
 import MemberList from './_components/MemberList';
-import { fetchClanInfo } from '@/utils/coc-api/fetchClanInfo';
-import { fetchClanWarLog } from '@/utils/coc-api/fetchClanWarLog';
 import WarLogPrivate from './_components/WarLogPrivate';
-import { fetchPlayerInfos } from '@/utils/coc-api/fetchPlayerInfos';
+
+import { getClan, getClanWarLog, getPlayer } from '@/utils/coc-api';
 import { redirect } from 'next/navigation';
 
 export default async function Page({ params }: { params: { clanTag: string } }) {
   const clanTag = decodeURIComponent(params.clanTag);
 
-  const [clanInfoRes, clanInfo] = await fetchClanInfo(clanTag);
-  if (clanInfoRes.status !== 200) {
+  const { response, data: clanInfo } = await getClan({ tag: clanTag });
+
+  if (response.status !== 200 || clanInfo === undefined) {
     redirect('/clan-not-found');
   }
 
-  const [warLogRes, warLog] = await fetchClanWarLog(clanTag, { limit: 20 });
+  const { response: warLogRes, data: warLog } = await getClanWarLog({ clanTag, limit: 20 });
 
+  if (warLogRes.status !== 200 || warLog === undefined) {
+    redirect('/500');
+  }
   //map war log
   let results: ('win' | 'tie' | 'lose')[] = [];
   if (warLogRes.status === 200) {
@@ -44,14 +47,23 @@ export default async function Page({ params }: { params: { clanTag: string } }) 
   );
 
   //map player
-  const sotedMemberList = [...clanInfo.memberList];
-  sotedMemberList.sort((a, b) => a.clanRank - b.clanRank);
+  const sortedMemberList = [...clanInfo.memberList];
+  sortedMemberList.sort((a, b) => a.clanRank - b.clanRank);
 
-  const playerTagList = sotedMemberList.map((member) => {
+  const playerTagList = sortedMemberList.map((member) => {
     return member.tag;
   });
 
-  const playerInfos = (await fetchPlayerInfos(playerTagList)).map(([, playerInfo]) => playerInfo);
+  const playersResList = await Promise.all(
+    playerTagList.map((playerTag) => {
+      return getPlayer({ tag: playerTag });
+    })
+  );
+
+  const players = playersResList.map(({ data: player }) => {
+    if (player === undefined) redirect('500');
+    return player;
+  });
 
   return (
     <main className={styles.main}>
@@ -72,8 +84,8 @@ export default async function Page({ params }: { params: { clanTag: string } }) 
         {clanInfo.isWarLogPublic ? (
           <WarRecords
             wins={clanInfo.warWins}
-            losses={clanInfo.warLosses}
-            ties={clanInfo.warTies}
+            losses={clanInfo.warLosses ?? 0}
+            ties={clanInfo.warTies ?? 0}
             winStreak={clanInfo.warWinStreak}
             recentRecords={recentRecords}
           />
@@ -88,7 +100,7 @@ export default async function Page({ params }: { params: { clanTag: string } }) 
           builderBaseTrophies={clanInfo.requiredBuilderBaseTrophies}
         />
         <Activities donations={donations} donationsReceived={donationsReceived} labels={clanInfo.labels} />
-        <MemberList memberList={playerInfos} />
+        <MemberList memberList={players} />
       </div>
     </main>
   );

@@ -1,16 +1,22 @@
-export async function fetchToCocApi(path: string, options: RequestInit = {}) {
-  const apiKey = process.env.COC_API_KEY;
-  const endpoint = process.env.COC_API_ENDPOINT;
+import { getClan } from './src/requesters/clans/getClan';
+import { getClanWarLog } from './src/requesters/clans/getClanWarLog';
+import { getSearchedClanList } from './src/requesters/clans/getSearchedClanList';
+import { getCurrentWar } from './src/requesters/clans/getCurrentWar';
 
-  const url = endpoint + path;
-  options.headers = { Authorization: `Bearer ${apiKey}`, ...options.headers };
+import { getClanRankingList } from './src/requesters/locations/getClanRankingList';
 
-  try {
-    const res = await fetch(url, options);
+import { getPlayer } from './src/requesters/players/getPlayer';
 
-    return res;
-  } catch (e) {
-    console.error(e);
-    throw e;
-  }
-}
+export {
+  //clans
+  getClan,
+  getClanWarLog,
+  getSearchedClanList,
+  getCurrentWar,
+
+  //locations
+  getClanRankingList,
+
+  //players
+  getPlayer,
+};

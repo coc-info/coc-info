@@ -1,11 +1,11 @@
-import { ClanMember as _ClanMember } from '@/utils/coc-api/fetchClanInfo';
 import styles from './index.module.scss';
 
 import Member from './Member';
-import { PlayerInfo } from '@/utils/coc-api/fetchPlayerInfo';
+
+import { Player } from '@/utils/coc-api/types/player/Player';
 
 interface MemberListProps {
-  memberList: PlayerInfo[];
+  memberList: Player[];
 }
 
 export default async function MemberList({ memberList }: MemberListProps) {

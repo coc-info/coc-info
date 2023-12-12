@@ -23,7 +23,7 @@ import th3Image from '@/images/game-images/structure/town-hall/town-hall-3.webp'
 import th2Image from '@/images/game-images/structure/town-hall/town-hall-2.webp';
 import th1Image from '@/images/game-images/structure/town-hall/town-hall-1.webp';
 
-import type { WarMember } from '@/utils/coc-api/requester/types/WarMember';
+import type { ClanWarMember } from '@/utils/coc-api/types/clan/war/ClanWarMember';
 
 const TH_TIMAGE_TABLE = [
   th1Image,
@@ -44,7 +44,7 @@ const TH_TIMAGE_TABLE = [
 ];
 
 interface WarMemberCardProps {
-  warMember: WarMember;
+  warMember: ClanWarMember;
   reverse?: boolean;
 }
 
@@ -92,9 +92,7 @@ export default function WarMemberCard({ warMember, reverse = false }: WarMemberC
             </div>
             <div className={styles.invade}>
               <Image alt="sword-icon" src={swordIcon} width={15} height={15} />
-              <span>
-                {bestOpponentAttack.attackerMapPosition}. {bestOpponentAttack.attackerName}
-              </span>
+              <span>99. temp user</span>
             </div>
           </div>
         </>

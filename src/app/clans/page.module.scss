@@ -1,6 +1,7 @@
 @use '../../styles/colors';
 @use '../../styles/background';
 @use '../../styles/screen';
+@use '../../styles/fonts/primaryFont';
 
 .main {
   min-height: 100vh;
@@ -17,4 +18,19 @@
   width: 100%;
   max-width: 768px;
   padding: 0 20px;
+}
+
+.listCursors {
+  display: flex;
+  gap: 30px;
+
+  > .cursor {
+    @include primaryFont.primary-15px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: colors.$main-color;
+
+    color: colors.$white;
+    text-decoration: none;
+  }
 }

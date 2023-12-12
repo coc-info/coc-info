@@ -3,9 +3,7 @@ import styles from './index.module.scss';
 
 import WarLeagueBadge from '@/components/images/badges/WarLeagueBadge';
 
-import type { WarLeague } from '@/types/warLeague';
-
-const LEAGUE_KR_TABLE: { [key: number]: { name: string; league: WarLeague } } = {
+const LEAGUE_KR_TABLE: { [key: number]: { name: string; league: string } } = {
   48000000: {
     name: '리그 없음',
     league: 'unranked',

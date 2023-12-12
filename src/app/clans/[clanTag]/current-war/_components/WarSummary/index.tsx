@@ -7,36 +7,18 @@ import swordIcon from '@/images/icons/sword.svg';
 import versusIcon from '@/images/icons/versus.svg';
 import Image from 'next/image';
 import { RemainingTimeTimer } from './RemainingTimeTimer';
-
-interface Clan {
-  tag: string;
-  name: string;
-  badgeUrl: string;
-  attacks: number;
-  stars: number;
-  destructionPercetage: number;
-  location?: string;
-}
-
+import { ClanWar } from '@/utils/coc-api/types/clan/war/ClanWar';
+import { Location } from '@/utils/coc-api/types/location/Location';
 interface WarSummaryProps {
-  state: 'inWar' | 'preparation' | 'warEnded';
-  startTime: string;
-  endTime: string;
-  teamSize: number;
-  attacksPerMember: number;
-  leftClan: Clan;
-  rightClan: Clan;
+  clanWar: ClanWar;
+  locations?: {
+    clan?: Location;
+    opponent?: Location;
+  };
 }
 
-export default function WarSummary({
-  state,
-  startTime,
-  endTime,
-  teamSize,
-  attacksPerMember,
-  leftClan,
-  rightClan,
-}: WarSummaryProps) {
+export default function WarSummary({ clanWar, locations }: WarSummaryProps) {
+  const { state, startTime, endTime, teamSize, attacksPerMember, clan, opponent } = clanWar;
   return (
     <div className={styles.warSummary}>
       {/*top*/}
@@ -54,7 +36,7 @@ export default function WarSummary({
       {/*middle*/}
       <div className={styles.middle}>
         <div className={styles.clanWrapper}>
-          <ClanInSummary badgeUrl={leftClan.badgeUrl} name={leftClan.name} location={leftClan.location} />
+          <ClanInSummary clan={clan} location={locations?.clan} />
         </div>
         <div className={styles.scoreBoardWrapper}>
           {state === 'preparation' ? (
@@ -64,14 +46,11 @@ export default function WarSummary({
               <span>{teamSize}</span>
             </div>
           ) : (
-            <ScoreBoard
-              leftTeam={{ stars: leftClan.stars, destructionPercentage: leftClan.destructionPercetage }}
-              rightTeam={{ stars: rightClan.stars, destructionPercentage: rightClan.destructionPercetage }}
-            />
+            <ScoreBoard clan={clan} opponent={opponent} />
           )}
         </div>
         <div className={styles.clanWrapper}>
-          <ClanInSummary badgeUrl={rightClan.badgeUrl} name={rightClan.name} location={rightClan.location} />
+          <ClanInSummary clan={opponent} location={locations?.opponent} />
         </div>
       </div>
 
@@ -81,7 +60,7 @@ export default function WarSummary({
           <div className={styles.attacks}>
             <Image alt="sword-icon" src={swordIcon} width={15} height={15} />
             <span>
-              {leftClan.attacks}/{teamSize * attacksPerMember}
+              {clan.attacks}/{teamSize * attacksPerMember}
             </span>
           </div>
           <div className={styles.versus}>
@@ -92,7 +71,7 @@ export default function WarSummary({
           <div className={styles.attacks}>
             <Image alt="sword-icon" src={swordIcon} width={15} height={15} />
             <span>
-              {rightClan.attacks}/{teamSize * attacksPerMember}
+              {opponent.attacks}/{teamSize * attacksPerMember}
             </span>
           </div>
         </div>
