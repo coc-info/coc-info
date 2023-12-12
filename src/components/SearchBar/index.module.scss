@@ -1,0 +1,50 @@
+@use '@/styles/colors';
+@use '@/styles/fonts/primaryFont';
+
+.searchBarWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.searchBar {
+  width: 100%;
+  padding: 0 20px;
+
+  display: flex;
+  justify-content: space-between;
+  background-color: colors.$light-black;
+  border: solid 1px colors.$dark-gray;
+  border-radius: 20px;
+
+  > input {
+    @include primaryFont.primary-15px;
+    width: 100%;
+    height: 36px;
+    display: block;
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+
+  > button {
+    width: 36px;
+    height: 36px;
+
+    background-color: transparent;
+    border: none;
+  }
+}
+
+.invalidatedMessage {
+  padding: 0 20px;
+  @include primaryFont.primary-13px;
+  color: colors.$negative-color;
+  line-height: 1.2;
+
+  > div > span {
+    margin-left: 10px;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}

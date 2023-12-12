@@ -1,0 +1,50 @@
+@use '../colors';
+
+$primary-color: colors.$gray;
+$primary-emphasized-color: colors.$white;
+$primary-deemphasized-color: colors.$dark-gray;
+
+@mixin primary-10px {
+  font-size: 0.625rem;
+  color: $primary-color;
+}
+
+@mixin primary-12px {
+  font-size: 0.75rem;
+  color: $primary-color;
+}
+
+@mixin primary-13px {
+  font-size: 0.8125rem;
+  color: $primary-color;
+}
+
+@mixin primary-14px {
+  font-size: 0.875rem;
+  color: $primary-color;
+}
+
+@mixin primary-15px {
+  font-size: 0.9375rem;
+  color: $primary-color;
+}
+
+@mixin primary-16px {
+  font-size: 1rem;
+  color: $primary-color;
+}
+
+@mixin primary-18px {
+  font-size: 1.125rem;
+  color: $primary-color;
+}
+
+@mixin primary-20px {
+  font-size: 1.25rem;
+  color: $primary-color;
+}
+
+@mixin primary-24px {
+  font-size: 1.5rem;
+  color: $primary-color;
+}

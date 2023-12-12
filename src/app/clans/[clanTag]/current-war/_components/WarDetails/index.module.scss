@@ -1,0 +1,11 @@
+@use '../../../../../../styles/background';
+
+.warDetails {
+  @include background.content;
+  width: 100%;
+
+  > div {
+    width: 100%;
+    display: flex;
+  }
+}
