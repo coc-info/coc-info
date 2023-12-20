@@ -20,11 +20,6 @@ interface ActivitiesProps {
 export default function Activities({ donations, donationsReceived, labels }: ActivitiesProps) {
   return (
     <div className={styles.activities}>
-      <div className={styles.labels}>
-        {labels.map((label, i) => {
-          return <Image key={i} alt={label.name} src={label.iconUrls.small} width={30} height={30} />;
-        })}
-      </div>
       <div className={styles.reinforcements}>
         <Image alt="arrow-positive" src={warriorPositive} width={20} height={20} />
         <span>{donations.toLocaleString()}</span>
@@ -32,6 +27,11 @@ export default function Activities({ donations, donationsReceived, labels }: Act
       <div className={styles.reinforcements}>
         <Image alt="arrow-negative" src={warriorNegative} width={20} height={20} />
         <span>{donationsReceived.toLocaleString()}</span>
+      </div>
+      <div className={styles.labels}>
+        {labels.map((label, i) => {
+          return <Image key={i} alt={label.name} src={label.iconUrls.small} width={30} height={30} />;
+        })}
       </div>
     </div>
   );

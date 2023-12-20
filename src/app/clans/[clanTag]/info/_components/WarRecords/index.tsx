@@ -1,4 +1,9 @@
+import Image from 'next/image';
 import styles from './index.module.scss';
+
+import checkIcon from '@/images/icons/check.svg';
+import xIcon from '@/images/icons/x.svg';
+import hyphenIcon from '@/images/icons/hyphen.svg';
 
 interface WarRecordsProps {
   wins: number;
@@ -31,11 +36,29 @@ export default function WarRecords({ wins, losses, ties, winStreak, recentRecord
             {recentRecords.map((result) => {
               switch (result) {
                 case 'win':
-                  return <div className={`${styles.record} ${styles.win}`}></div>;
+                  return (
+                    <div className={`${styles.recordContainer} ${styles.win}`}>
+                      <div className={`${styles.record} ${styles.win}`}>
+                        <Image alt="checkIcon" src={checkIcon} width={9} height={9} />
+                      </div>
+                    </div>
+                  );
                 case 'lose':
-                  return <div className={`${styles.record} ${styles.lose}`}></div>;
+                  return (
+                    <div className={`${styles.recordContainer} ${styles.lose}`}>
+                      <div className={`${styles.record} ${styles.lose}`}>
+                        <Image alt="closeIcon" src={xIcon} width={9} height={9} />
+                      </div>
+                    </div>
+                  );
                 case 'tie':
-                  return <div className={`${styles.record}`}></div>;
+                  return (
+                    <div className={styles.recordContainer}>
+                      <div className={styles.record}>
+                        <Image alt="hyphenIcon" src={hyphenIcon} width={9} height={9} />
+                      </div>
+                    </div>
+                  );
               }
             })}
           </div>

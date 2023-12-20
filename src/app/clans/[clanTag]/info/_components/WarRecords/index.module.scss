@@ -37,21 +37,49 @@
 .recordsBoard {
   display: flex;
   gap: 5px;
-  align-items: center;
+  align-items: flex-start;
+  .recordContainer {
+    &:last-child {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
 
-  > .record {
-    width: 10px;
-    height: 10px;
-    border-radius: 10px;
+      &::after {
+        content: '';
+        display: block;
+        width: 9px;
+        height: 2px;
+        background-color: colors.$neutral-color;
+      }
 
-    background-color: colors.$neutral-color;
+      &.win::after {
+        background-color: colors.$positive-color;
+      }
 
-    &.win {
-      background-color: colors.$positive-color;
+      &.lose::after {
+        background-color: colors.$negative-color;
+      }
     }
 
-    &.lose {
-      background-color: colors.$negative-color;
+    > .record {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 13px;
+      height: 13px;
+      border-radius: 13px;
+
+      background-color: colors.$neutral-color;
+
+      &.win {
+        background-color: colors.$positive-color;
+      }
+
+      &.lose {
+        background-color: colors.$negative-color;
+      }
     }
   }
 }

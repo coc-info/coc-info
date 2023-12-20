@@ -14,28 +14,34 @@ import { redirect } from 'next/navigation';
 export default async function Page({ params }: { params: { clanTag: string } }) {
   const clanTag = decodeURIComponent(params.clanTag);
 
+  //getClan
   const { response, data: clanInfo } = await getClan({ tag: clanTag });
 
   if (response.status !== 200 || clanInfo === undefined) {
     redirect('/clan-not-found');
   }
 
-  const { response: warLogRes, data: warLog } = await getClanWarLog({ clanTag, limit: 20 });
+  let recentRecords: ('win' | 'tie' | 'lose')[] = [];
 
-  if (warLogRes.status !== 200 || warLog === undefined) {
-    redirect('/500');
-  }
-  //map war log
-  let results: ('win' | 'tie' | 'lose')[] = [];
-  if (warLogRes.status === 200) {
-    results = warLog.items.reduce<('win' | 'tie' | 'lose')[]>((results, item) => {
-      if (item.result === null) return results;
-      return [...results, item.result];
-    }, []);
-  }
+  if (clanInfo.isWarLogPublic === true) {
+    //getClanWarLog
+    const { response: warLogRes, data: warLog } = await getClanWarLog({ clanTag, limit: 20 });
 
-  const recentRecords = results.slice(0, 10);
-  recentRecords.reverse();
+    if (warLogRes.status !== 200 || warLog === undefined) {
+      redirect('/500');
+    }
+    //map war log
+    let results: ('win' | 'tie' | 'lose')[] = [];
+    if (warLogRes.status === 200) {
+      results = warLog.items.reduce<('win' | 'tie' | 'lose')[]>((results, item) => {
+        if (item.result === null) return results;
+        return [...results, item.result];
+      }, []);
+    }
+
+    recentRecords = results.slice(0, 10);
+    recentRecords.reverse();
+  }
 
   //calc tatal donations
   const [donations, donationsReceived] = clanInfo.memberList.reduce(
