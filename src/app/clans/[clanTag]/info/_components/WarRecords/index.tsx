@@ -39,7 +39,7 @@ export default function WarRecords({ wins, losses, ties, winStreak, recentRecord
                   return (
                     <div className={`${styles.recordContainer} ${styles.win}`}>
                       <div className={`${styles.record} ${styles.win}`}>
-                        <Image alt="checkIcon" src={checkIcon} width={9} height={9} />
+                        <Image alt="checkIcon" src={checkIcon} width={11} height={11} />
                       </div>
                     </div>
                   );
@@ -47,7 +47,7 @@ export default function WarRecords({ wins, losses, ties, winStreak, recentRecord
                   return (
                     <div className={`${styles.recordContainer} ${styles.lose}`}>
                       <div className={`${styles.record} ${styles.lose}`}>
-                        <Image alt="closeIcon" src={xIcon} width={9} height={9} />
+                        <Image alt="closeIcon" src={xIcon} width={11} height={11} />
                       </div>
                     </div>
                   );
@@ -55,7 +55,7 @@ export default function WarRecords({ wins, losses, ties, winStreak, recentRecord
                   return (
                     <div className={styles.recordContainer}>
                       <div className={styles.record}>
-                        <Image alt="hyphenIcon" src={hyphenIcon} width={9} height={9} />
+                        <Image alt="hyphenIcon" src={hyphenIcon} width={11} height={11} />
                       </div>
                     </div>
                   );

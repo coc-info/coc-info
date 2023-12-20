@@ -48,7 +48,7 @@
       &::after {
         content: '';
         display: block;
-        width: 9px;
+        width: 11px;
         height: 2px;
         background-color: colors.$neutral-color;
       }
@@ -67,9 +67,9 @@
       justify-content: center;
       align-items: center;
 
-      width: 13px;
-      height: 13px;
-      border-radius: 13px;
+      width: 15px;
+      height: 15px;
+      border-radius: 15px;
 
       background-color: colors.$neutral-color;
 

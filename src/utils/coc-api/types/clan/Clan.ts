@@ -53,7 +53,7 @@ export const checkClan: TypeChecker<Clan> = (data): data is Clan => {
     data &&
     typeof data.tag === 'string' &&
     typeof data.name === 'string' &&
-    ['opon', 'inviteOnly', 'closed'].includes(data.type) &&
+    ['open', 'inviteOnly', 'closed'].includes(data.type) &&
     typeof data.description === 'string'
   ) {
     return true;
