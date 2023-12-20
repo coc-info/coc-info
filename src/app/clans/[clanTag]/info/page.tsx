@@ -82,7 +82,7 @@ export default async function Page({ params }: { params: { clanTag: string } }) 
           location={clanInfo.location?.name}
         />
         <Scores
-          warLeagueId={clanInfo.warLeague.id}
+          warLeague={clanInfo.warLeague}
           tropies={clanInfo.clanPoints}
           builderTropies={clanInfo.clanBuilderBasePoints}
           capitalTropies={clanInfo.clanCapitalPoints}

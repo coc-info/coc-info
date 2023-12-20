@@ -24,7 +24,67 @@ import warChampion1Badge from '@/images/game-images/icons/war-league-badges/war-
 import warChampion2Badge from '@/images/game-images/icons/war-league-badges/war-champion-2.webp';
 import warChampion3Badge from '@/images/game-images/icons/war-league-badges/war-champion-3.webp';
 
-import type { WarLeague } from '@/types/warLeague';
+import type { WarLeague } from '@/utils/coc-api/types/leagues/WarLeague';
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
+
+const BADGE_TABLE: { readonly [key: number]: string | StaticImport | any } = {
+  //Unranked
+  48000000: '',
+
+  // Bronze League III
+  48000001: warBronze3Badge,
+
+  // Bronze League II
+  48000002: warBronze2Badge,
+
+  // Bronze League I
+  48000003: warBronze1Badge,
+
+  // Silver League III
+  48000006: warSilver3Badge,
+
+  // Silver League II
+  48000005: warSilver2Badge,
+
+  // Silver League I
+  48000004: warSilver1Badge,
+
+  // Gold League III
+  48000007: warGold3Badge,
+
+  // Gold League II
+  48000008: warGold2Badge,
+
+  // Gold League I
+  48000009: warGold1Badge,
+
+  // Crystal League III
+  48000010: warCrystal3Badge,
+
+  // Crystal League II
+  48000011: warCrystal2Badge,
+
+  // Crystal League I
+  48000012: warCrystal1Badge,
+
+  // Master League III
+  48000013: warMaster3Badge,
+
+  // Master League II
+  48000014: warMaster2Badge,
+
+  // Master League I
+  48000015: warMaster1Badge,
+
+  // Champion League III
+  48000016: warChampion3Badge,
+
+  // Champion League II
+  48000017: warChampion2Badge,
+
+  // Champion League I
+  48000018: warChampion1Badge,
+};
 
 interface WarLeagueBadgeProps {
   league: WarLeague;
@@ -33,27 +93,5 @@ interface WarLeagueBadgeProps {
 }
 
 export default function WarLeagueBadge({ league, width, height }: WarLeagueBadgeProps) {
-  const BADGE_TABLE = {
-    unranked: '',
-    bronze1: warBronze1Badge,
-    bronze2: warBronze2Badge,
-    bronze3: warBronze3Badge,
-    silver1: warSilver1Badge,
-    silver2: warSilver2Badge,
-    silver3: warSilver3Badge,
-    gold1: warGold1Badge,
-    gold2: warGold2Badge,
-    gold3: warGold3Badge,
-    crystal1: warCrystal1Badge,
-    crystal2: warCrystal2Badge,
-    crystal3: warCrystal3Badge,
-    master1: warMaster1Badge,
-    master2: warMaster2Badge,
-    master3: warMaster3Badge,
-    champion1: warChampion1Badge,
-    champion2: warChampion2Badge,
-    champion3: warChampion3Badge,
-  } as const;
-
-  return <Image alt="클랜전 리그 뱃지" src={BADGE_TABLE[league]} width={width} height={height} />;
+  return <Image alt="클랜전 리그 뱃지" src={BADGE_TABLE[league.id]} width={width} height={height} />;
 }

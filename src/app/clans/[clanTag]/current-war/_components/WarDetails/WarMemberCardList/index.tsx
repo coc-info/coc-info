@@ -2,7 +2,7 @@ import styles from './index.module.scss';
 
 import WarMemberCard from '../WarMemberCard';
 
-import type { ClanWarMember } from '@/utils/coc-api/types';
+import type { ClanWarMember } from '@/utils/coc-api/types/clan/war/ClanWarMember';
 
 interface WarMemberCardListProps {
   clanMembers: ClanWarMember[];

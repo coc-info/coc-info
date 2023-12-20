@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styles from './index.module.scss';
 import Link from 'next/link';
-import { ClanRanking } from '@/utils/coc-api/types';
+import { ClanRanking } from '@/utils/coc-api/types/clan/ClanRanking';
 
 interface ItemProps {
   clanRaking: ClanRanking;
