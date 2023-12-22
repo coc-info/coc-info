@@ -8,8 +8,9 @@ import { redirect } from 'next/navigation';
 export default async function Page({ params }: { params: { clanTag: string } }) {
   const clanTag = decodeURIComponent(params.clanTag);
   const result = await getCurrentWar({ tag: clanTag });
-  const { data: currentWar } = result;
-  if (currentWar === undefined) {
+  const { response, data: currentWar } = result;
+
+  if (response.status === 403 || currentWar === undefined) {
     redirect('./private-warlog');
   }
 

@@ -9,14 +9,16 @@ import filledStarIcon from '@/images/icons/star--fill.svg';
 
 import type { ClanWarMember } from '@/utils/coc-api/types/clan/war/ClanWarMember';
 import { getTownHallImage } from '@/utils/coc-image/getTownHallImage';
+import { ClanWarAttack } from '@/utils/coc-api/types/clan/war/ClanWarAttack';
 
 interface WarMemberCardProps {
   warMember: ClanWarMember;
+  bestOpponentAttack?: ClanWarAttack & { attackerName: string; attackerMapPosition: number };
   reverse?: boolean;
 }
 
-export default function WarMemberCard({ warMember, reverse = false }: WarMemberCardProps) {
-  const { name, bestOpponentAttack, mapPosition, townhallLevel, opponentAttacks } = warMember;
+export default function WarMemberCard({ warMember, bestOpponentAttack, reverse = false }: WarMemberCardProps) {
+  const { name, mapPosition, townhallLevel, opponentAttacks } = warMember;
 
   const resultsOfStars = [false, false, false];
   if (bestOpponentAttack !== undefined) {
@@ -59,7 +61,9 @@ export default function WarMemberCard({ warMember, reverse = false }: WarMemberC
             </div>
             <div className={styles.invade}>
               <Image alt="sword-icon" src={swordIcon} width={15} height={15} />
-              <span>99. temp user</span>
+              <span>
+                {bestOpponentAttack.attackerMapPosition}. {bestOpponentAttack.attackerName}
+              </span>
             </div>
           </div>
         </>

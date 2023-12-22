@@ -1,6 +1,10 @@
 @use '@/styles/colors';
 
 .warMemberCardList {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
   > li {
     display: flex;
     border-bottom: 1px solid colors.$pale-black;
