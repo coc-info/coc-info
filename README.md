@@ -36,7 +36,8 @@ npm run start
 
 coc-api유틸리티는 Clash of Clans API(이하 COC API)에 요청을 보내는 유틸리티입니다. 내부적으로 API Key 인증과 에러처리 및 타입체크를 수행합니다.
 
-coc-api(utils/coc-api/README.md링크)자세히
+[coc-api 자세히](https://github.com/coc-info/coc-info/tree/main/src/utils/coc-api)
+
 
 ## 컨벤션
 
