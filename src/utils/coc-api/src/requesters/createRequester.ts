@@ -32,11 +32,6 @@ const fetchFromCocApi: FetchFromCocApi = async (path: string, options: RequestIn
   }
 };
 
-export interface RequesterCreatorParams<T, P> {
-  fetcher: Fetcher<P>;
-  typeChecker: TypeChecker<T>;
-}
-
 export function createRequester<T, P>(fetcher: Fetcher<P>, typeChecker: TypeChecker<T>): Requester<T, P> {
   return async (params: P) => {
     const { response, data } = await fetcher(fetchFromCocApi, params);
