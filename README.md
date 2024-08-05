@@ -1,5 +1,11 @@
 # COC Info
 
+게임 Clash of Clans의 클랜 정보를 제공하는 웹사이트입니다.
+
+개발 기간: 2023년 10월 ~ 11월
+
+배포 링크: https://cocinfo.net/
+
 ## 시스템 아키텍처
 
 ![시스템 아키텍처](https://github.com/coc-info/coc-info/assets/78804014/498c5b5f-d26c-48a9-b4fb-d80b9900d134)
@@ -30,87 +36,38 @@ npm run build
 npm run start
 ```
 
-## 유틸리티
+## 고민한 것
 
-### coc-api
+### 게임 API 요청 코드 구조 개선
 
-coc-api유틸리티는 Clash of Clans API(이하 COC API)에 요청을 보내는 유틸리티입니다. 내부적으로 API Key 인증과 에러처리 및 타입체크를 수행합니다.
+게임 API에 요청을 할 때 에러처리와 응답값에 대한 타입체크를 수행해주어야 합니다.
+요청이 필요한 곳 마다 요청, 에러처리, 타입체크 코드를 중복으로 작성하는 것은 매우 비효율적입니다.
+[coc-api](https://github.com/coc-info/coc-info/tree/main/src/utils/coc-api) 유틸리티 모듈은 내부적으로 에러처리, 타입체크를 수행하여 사용자가 요청과 응답에만 신경쓸 수 있도록 도와줍니다.
 
-[coc-api 자세히](https://github.com/coc-info/coc-info/tree/main/src/utils/coc-api)
+![Requester가 작동하는 방식을 표현한 다이어그램](./for-readme/requester-flow.png)
 
+coc-api 내부에서 새로운 요청코드(Request)를 작성할 때 의사결정 시간을 줄이기 위해 요청코드가 특정 절차에 따라 일관된 방법으로 생성될 수 있도록 하였습니다.
 
-## 컨벤션
+![Requester가 생성되는 과정을 표현한 다이어그램](./for-readme/how-to-create-requester.png)
 
-### 컴포넌트
+Fetcher와 TypeChecker를 인수로 createRequester를 호출하면 Requester가 반환됩니다.
+반환된 Requester를 통해 게임 API에 요청을 보냅니다.
 
-#### 컴포넌트 종류
+- Fetcher: 실질적으로 요청을 보내는 콜백함수
+- TypeChecker: 응답으로 받은 데이터의 타입을 검사하는 콜백함수
+- Requester: 게임 API에 요청을 보내는 함수
 
-컴포넌트는 두 종류가 있습니다.
+### 컴포넌트 폴더 구조 개선
 
-- 페이지 컴포넌트: 각 라우트에 하나씩 있는 page.tsx파일에 정의된 컴포넌트입니다.
-- 일반 컴포넌트: 페이지 컴포넌트를 제외한 모든 컴포넌트입니다.
+컴포넌트가 많아지면 다음과 같은 문제가 발생할 수 있습니다.
 
-#### 컴포넌트 폴더 구조
+- 다른 곳에서 재사용해도 문제없이 작동하는 컴포넌트인지 확인하기 어렵습니다.
+- 부모,자식 관계를 파악하는데 시간이 걸립니다. 그래서 코드를 수정할 때 코드의 시작점을 찾는데 번거롭고 해당 컴포넌트가 독립적인지 의존적인지 파악하는데 시간이 걸립니다.
 
-일반 컴포넌트는 컴포넌트 이름으로 명명된 폴더의 내부 index.tsx파일에 작성합니다.
+이러한 문제를 해결하기 위한 관점으로 컴포넌트와 관련된 폴더의 규칙을 정했습니다.
 
-```
-FooComponent
-└─ index.tsx
-```
+src/components는 모든 페이지에서 재사용될 수 있는 컴포넌트가 포함됩니다.
+각 페이지의 \_components는 해당페이지에서 재사용되지 않는 컴포넌트와 해당페이지와 하위페이지에서 재사용 될 수 있는 컴포넌트가 포함됩니다.
 
-```tsx
-// FooComponent/index.tsx
-function FooComponent() {
-  return <div>{/* ... */}</div>;
-}
-```
-
-일반 컴포넌트 폴더 내부에 자식 컴포넌트나 유틸리티 등 해당 컴포넌트에 관련된 것들을 포함시킬 수 있습니다.
-
-```
-FooComponent
-├─ index.tsx
-├─ BarComponent
-│  └─ index.tsx
-└─ utils
-   └─ calc.ts
-```
-
-```tsx
-// FooComponent/index.tsx
-import BarComponent from './BarComponents';
-import { sum } from './utils/calc';
-
-function FooComponent() {
-  const num = sum(5, 6);
-  return (
-    <div>
-      <BarCompoent>{num}</BarCompoent>
-    </div>
-  );
-}
-```
-
-모든 일반 컴포넌트는 `src/components`또는 각 라우트 폴더의 `_components`폴더 안에 위치해야합니다.
-
-```
-src
-├─ components
-│  └─ CommonButton
-│     └─ ...
-└─ app
-   ├─ page.tsx
-   ├─ _components
-   │  └─ FooComponent
-   │     └─ ...
-   └─ clans
-      ├─ page.tsx
-      └─ _components
-         └─ BarComponent
-            └─ ...
-```
-
-`src/components`폴더는 모든 페이지에서 재사용 될 수 있는 컴포넌트를 포함합니다.
-
-각 라우트 폴더의 `_components`폴더는 해당 라우트에서 사용될 컴포넌트를 포함합니다. 이 컴포넌트는 재사용을 고려하지 않아도 됩니다.
+components와 \_components폴더에 포함된 컴포넌트는 폴더로 취급됩니다.
+폴더를 컴포넌트 이름으로 명명하고 index.tsx에 코드를 작성합니다. 해당 폴더에 해당 컴포넌트와 관련된 자원과 자식 컴포넌트를 추가할 수 있습니다.
